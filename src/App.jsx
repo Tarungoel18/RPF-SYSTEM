@@ -7,11 +7,12 @@ import "./assets/css/icons.min.css";
 import "./assets/css/style.css";
 import { Toaster } from "react-hot-toast";
 
+import VendorSignUp from "./pages/vendor-signup";
 import Login from "./pages/login";
 function App() {
   return (
     <>
-      <Login />
+      <VendorSignUp />
       <Toaster position="top-center" reverseOrder={false} />
     </>
   );

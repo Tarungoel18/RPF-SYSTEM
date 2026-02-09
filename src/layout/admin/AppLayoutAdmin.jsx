@@ -1,9 +1,9 @@
-import velocityLogo from "../../assets/images/velocity_logo.png"
+import velocityLogo from "../../assets/images/velocity_logo.png";
 import { useSelector } from "react-redux";
 import { logout } from "../../redux/slices/authslice.js";
 import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
-import "./admin.css"
+import "./admin.css";
 import { ROUTES } from "../../constants/RoutesConst.js";
 //TODO-> Remove inline css and handle left navbar and handle Breadcrumbs
 
@@ -18,9 +18,7 @@ const AppLayoutAdmin = () => {
     <div id="layout-wrapper">
       <header id="page-topbar">
         <div className="navbar-header">
-          <div
-            className="d-flex bg-navy"
-          >
+          <div className="d-flex bg-navy">
             <div className="navbar-brand-box">
               <span className="logo-lg">
                 <img src={velocityLogo} alt="Velocity Logo" height="75" />
@@ -35,7 +33,10 @@ const AppLayoutAdmin = () => {
               </span>
               &nbsp;&nbsp;
               {/* //TODO-> change logout button style */}
-              <span className="text-danger cursor-pointer"  onClick={handleLogout}>
+              <span
+                className="text-danger cursor-pointer"
+                onClick={handleLogout}
+              >
                 Logout
               </span>
             </div>
@@ -50,19 +51,28 @@ const AppLayoutAdmin = () => {
             <ul className="metismenu list-unstyled" id="side-menu">
               <li>
                 {/* //TODO-> Use variable instead of hardcoding them in all the file */}
-                <Link to={ROUTES.ADMIN_DASHBOARD} className="waves-effect hoverWhite">
+                <Link
+                  to={ROUTES.ADMIN_DASHBOARD}
+                  className="waves-effect hoverWhite"
+                >
                   <i className="mdi mdi-file-document-box-outline"></i>
                   <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.CATEGORIES} className="waves-effect hoverWhite">
+                <Link
+                  to={ROUTES.CATEGORIES}
+                  className="waves-effect hoverWhite"
+                >
                   <i className="mdi mdi-receipt"></i>
                   <span>Categories</span>
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.VENDORS_LIST} className="waves-effect hoverWhite">
+                <Link
+                  to={ROUTES.VENDORS_LIST}
+                  className="waves-effect hoverWhite"
+                >
                   <i className="mdi mdi-flip-vertical"></i>
                   <span>Vendors</span>
                 </Link>
@@ -71,12 +81,6 @@ const AppLayoutAdmin = () => {
                 <Link to={ROUTES.RFP_LIST} className="waves-effect hoverWhite">
                   <i className="mdi mdi-apps"></i>
                   <span>RFP Lists</span>
-                </Link>
-              </li>
-              <li>
-                <Link to={ROUTES.CATEGORIES} className="waves-effect hoverWhite">
-                  <i className="mdi mdi-weather-night"></i>
-                  <span>Categories</span>
                 </Link>
               </li>
             </ul>

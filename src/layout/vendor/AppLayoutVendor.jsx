@@ -49,7 +49,7 @@ const AppLayoutVendor = () => {
             <ul className="metismenu list-unstyled" id="side-menu">
               <li>
                 {/* //TODO-> Use variable instead of hardcoding them in all the file */}
-                <Link to="/dashboard" className="waves-effect hoverWhite">
+                <Link to={ROUTES.VENDOR_DASHBOARD} className="waves-effect hoverWhite">
                   <i className="mdi mdi-file-document-box-outline"></i>
                   <span>Dashboard</span>
                 </Link>
@@ -73,7 +73,7 @@ const AppLayoutVendor = () => {
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.CATEGORIES} className="waves-effect hoverWhite">
+                <Link to={ROUTES.CA} className="waves-effect hoverWhite">
                   <i className="mdi mdi-weather-night"></i>
                   <span>Categories</span>
                 </Link>

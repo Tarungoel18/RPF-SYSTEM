@@ -1,5 +1,5 @@
-.bg-navy{
-    background-color: #27333A;
+.bg-navy {
+  background-color: #27333A;
 }
 
 .hoverWhite:hover,
@@ -8,6 +8,6 @@
   color: white !important;
 }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }

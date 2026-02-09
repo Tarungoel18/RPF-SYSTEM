@@ -8,5 +8,6 @@ export const ROUTES = {
   VENDORS_LIST:"/vendors-list",
   RFP_LIST:"/rfp-list",
   QUOTES:"/rfp-quotes",
+  ADD_RFP:"/add-rfp",
   NOT_FOUND: "*",
 };

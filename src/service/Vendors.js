@@ -8,9 +8,16 @@ export const getVendors = (token) => {
   return axiosInstance.get(API.VENDORS_LIST, config);
 };
 
-export const approveVendor = (payload,token) => {
-     const config = {
+export const approveVendor = (payload, token) => {
+  const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  return axiosInstance.post(API.APPROVE_VENDOR,payload,config)
-}
+  return axiosInstance.post(API.APPROVE_VENDOR, payload, config);
+};
+
+export const getVendorsByCategory = (id, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return axiosInstance.get(`${API.VENDORS_LIST}/${id}`, config);
+};

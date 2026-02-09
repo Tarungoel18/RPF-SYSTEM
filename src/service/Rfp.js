@@ -21,3 +21,10 @@ export const getRfpQuotes = (id, token) => {
   };
   return axiosInstance.get(`${API.RFP_QUOTES}/${id}`, config);
 };
+
+export const addRpf = (payload, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return axiosInstance.post(API.CREATE_RPF, payload, config);
+};

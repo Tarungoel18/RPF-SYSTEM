@@ -7,7 +7,8 @@ const API = {
   APPROVE_VENDOR:"/approveVendor",
   RFP_LIST:"/rfp/all",
   CLOSE_RFP:"/rfp/closerfp",
-  RFP_QUOTES:"/rfp/quotes"
+  RFP_QUOTES:"/rfp/quotes",
+  CREATE_RPF:"/createrfp"
 
 };
 

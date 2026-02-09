@@ -14,6 +14,7 @@ const AddCategory = lazy(() => import("../pages/add-category"));
 const VendorsList = lazy(() => import("../pages/vendors-list"));
 const RfpList = lazy(() => import("../pages/rfp-list"));
 const RpfQuotes = lazy(() => import("../pages/rpf-quotes"));
+const AddRfp = lazy(() => import("../pages/add-rfp"));
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
             <Route path={ROUTES.VENDORS_LIST} element={<VendorsList />} />
             <Route path={ROUTES.RFP_LIST} element={<RfpList />} />
             <Route path={`${ROUTES.QUOTES}/:id`} element={<RpfQuotes />} />
+            <Route path={ROUTES.ADD_RFP} element={<AddRfp />} />
           </Route>
         </Route>
 

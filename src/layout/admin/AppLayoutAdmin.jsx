@@ -62,7 +62,7 @@ const AppLayoutAdmin = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/rpf-list" className="waves-effect hoverWhite">
+                <Link to={ROUTES.VENDORS_LIST} className="waves-effect hoverWhite">
                   <i className="mdi mdi-flip-vertical"></i>
                   <span>RFP Lists</span>
                 </Link>

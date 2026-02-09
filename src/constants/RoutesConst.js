@@ -5,5 +5,6 @@ export const ROUTES = {
   CATEGORIES: "/categories",
   ADD_CATEGORY: "/add-category",
   VENDOR_DASHBOARD: "/dashboard-vendor",
+  VENDORS_LIST:"/vendors-list",
   NOT_FOUND: "*",
 };

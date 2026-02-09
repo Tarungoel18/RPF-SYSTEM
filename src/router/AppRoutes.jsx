@@ -11,6 +11,7 @@ const AdminDashboard = lazy(() => import("../pages/admin-dashboard"));
 const VendorDashboard = lazy(() => import("../pages/vendor-dashboard"));
 const Categories = lazy(() => import("../pages/categories"));
 const AddCategory = lazy(() => import("../pages/add-category"));
+const VendorsList = lazy(() => import("../pages/vendors-list"));
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
             <Route path={ROUTES.ADMIN_DASHBOARD} element={<AdminDashboard />} />
             <Route path={ROUTES.CATEGORIES} element={<Categories />} />
             <Route path={ROUTES.ADD_CATEGORY} element={<AddCategory />} />
+            <Route path={ROUTES.VENDORS_LIST} element={<VendorsList />} />
           </Route>
         </Route>
 

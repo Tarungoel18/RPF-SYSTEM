@@ -1,63 +1,93 @@
 import { useEffect, useState } from "react";
-import { getCategories } from "../../service/Category.js";
 import Table from "../../components/table/index.jsx";
 import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
+import { closeRfp, getRfps } from "../../service/Rfp.js";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
-const Categories = () => {
-  const [categories, setCategories] = useState(null);
+const RfpList = () => {
+  const [rfpList, setRfpList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchRfps = async () => {
       setIsLoading(true);
       try {
-        const res = await getCategories();
-        const cats = Object.values(res?.data?.categories || {});
-        setCategories(cats);
-        console.log(res?.data?.categories);
+        const res = await getRfps(token);
+        const rfps = Object.values(res?.data?.rfps || {});
+        setRfpList(rfps);
+        console.log(res?.data?.rfps);
       } catch (error) {
         console.error(error);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchCategories();
+    fetchRfps();
   }, []);
 
   const offset = currentPage * itemsPerPage;
-  const currentPageData = categories?.slice(offset, offset + itemsPerPage);
-  const pageCount = categories
-    ? Math.ceil(categories.length / itemsPerPage)
-    : 0;
+  const currentPageData = rfpList?.slice(offset, offset + itemsPerPage);
+  const pageCount = rfpList ? Math.ceil(rfpList?.length / itemsPerPage) : 0;
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
 
-  const handleStatus = (row) => {
-    console.log("Clickedd", row);
+  const handleStatus = async (row) => {
+    //TODO-> ADD Spinner
+    console.log(row);
+
+    try {
+      const res = await closeRfp(row?.rfp_id, token);
+      if (res?.data?.response === "success") {
+        toast.success(res?.data?.quotes);
+        setRfpList((prev) =>
+          prev.map((rfp) =>
+            rfp.rfp_id === row.rfp_id ? { ...rfp, status: "closed" } : rfp,
+          ),
+        );
+      } else {
+        toast.error(res?.data?.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const columns = [
     {
-      header: "S. No.",
-      render: (row, rowIndex) => currentPage * itemsPerPage + rowIndex + 1,
+      header: "RFP No.",
+      accessor: "rfp_id",
     },
     {
-      header: "Categories Name",
-      accessor: "name",
+      header: "RFP Title",
+      accessor: "item_name",
+    },
+    {
+      header: "RFP Last Date",
+      accessor: "last_date",
+    },
+    {
+      header: "Min Amount",
+      accessor: "minimum_price",
+    },
+    {
+      header: "Max Amount",
+      accessor: "maximum_price",
     },
     {
       header: "Status",
       render: (row) => (
         <span
           className={`badge badge-pill ${
-            row.status === "Active" ? "badge-success" : "badge-danger"
+            row.status === "open" ? "badge-success" : "badge-danger"
           }`}
         >
           {row?.status?.toUpperCase()}
@@ -67,14 +97,24 @@ const Categories = () => {
     {
       header: "Action",
       render: (row) => (
-        <span
-          className={`fst-italic ${
-            row.status === "Active" ? "text-danger" : "text-success"
-          }`}
-          onClick={() => handleStatus(row)}
-        >
-          {row.status === "Active" ? "Deactivate" : "Activate"}
-        </span>
+        <div className="d-flex gap-2 align-items-center">
+          <Link
+            to={`${ROUTES.QUOTES}/${row.rfp_id}`}
+            state={{ rfpId: row.rfp_id, quantity: row.quantity }}
+            title="View Quotes"
+            className="text-primary"
+          >
+            <i className="mdi mdi-file-document-outline fs-5"></i>
+          </Link>
+          {row.status === "open" && (
+            <span
+              className="fst-italic cursor-pointer text-danger"
+              onClick={() => handleStatus(row)}
+            >
+              Close
+            </span>
+          )}
+        </div>
       ),
     },
   ];
@@ -85,27 +125,28 @@ const Categories = () => {
         <BeatLoader />
       </div>
     );
+
   return (
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
-        <h5 className="mb-0">Categories</h5>
+        <h5 className="mb-0">RFP List</h5>
 
         <div className="page-title-right">
           <ol className="breadcrumb m-0">
             <li className="breadcrumb-item">
               <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
             </li>
-            <li className="breadcrumb-item active">Categories</li>
+            <li className="breadcrumb-item active">RFP List</li>
           </ol>
         </div>
       </div>
       <Table
-        title={"Categories"}
+        title={"RFP"}
         data={currentPageData}
         headerAction={
-          <Link to={ROUTES.ADD_CATEGORY}>
+          <Link to={ROUTES.ADD_RFP}>
             <button className="btn btn-sm btn-success">
-              <i className="mdi mdi-plus"></i> Add Category
+              <i className="mdi mdi-plus"></i> Add RFP
             </button>
           </Link>
         }
@@ -134,4 +175,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default RfpList;

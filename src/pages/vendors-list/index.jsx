@@ -42,6 +42,7 @@ const VendorsList = () => {
   };
 
   const handleStatus = async (row) => {
+    //TODO-> Add a Spinner
     try {
       const formData = new FormData();
       formData.append("user_id", row?.user_id);
@@ -68,7 +69,7 @@ const VendorsList = () => {
   const columns = [
     {
       header: "S. No.",
-      accessor: "user_id",
+      render: (row, rowIndex) => currentPage * itemsPerPage + rowIndex + 1,
     },
     {
       header: "First Name",
@@ -97,7 +98,7 @@ const VendorsList = () => {
             row.status === "Approved" ? "badge-success" : "badge-danger"
           }`}
         >
-          {row?.status}
+          {row?.status?.toUpperCase()}
         </span>
       ),
     },
@@ -136,11 +137,7 @@ const VendorsList = () => {
           </ol>
         </div>
       </div>
-      <Table
-        title={"Vendors"}
-        data={currentPageData}
-        columns={columns}
-      />
+      <Table title={"Vendors"} data={currentPageData} columns={columns} />
       <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}

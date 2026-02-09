@@ -1,0 +1,23 @@
+import axiosInstance from "./axiosInstance";
+import API from "../constants/ApiConst";
+
+export const getRfps = (token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return axiosInstance.get(API.RFP_LIST, config);
+};
+
+export const closeRfp = (id, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return axiosInstance.get(`${API.CLOSE_RFP}/${id}`, config);
+};
+
+export const getRfpQuotes = (id, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return axiosInstance.get(`${API.RFP_QUOTES}/${id}`, config);
+};

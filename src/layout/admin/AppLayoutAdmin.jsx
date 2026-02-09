@@ -64,13 +64,13 @@ const AppLayoutAdmin = () => {
               <li>
                 <Link to={ROUTES.VENDORS_LIST} className="waves-effect hoverWhite">
                   <i className="mdi mdi-flip-vertical"></i>
-                  <span>RFP Lists</span>
+                  <span>Vendors</span>
                 </Link>
               </li>
               <li>
-                <Link to="/users" className="waves-effect hoverWhite">
+                <Link to={ROUTES.RFP_LIST} className="waves-effect hoverWhite">
                   <i className="mdi mdi-apps"></i>
-                  <span>User Management</span>
+                  <span>RFP Lists</span>
                 </Link>
               </li>
               <li>

@@ -1,81 +1,80 @@
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getCategories } from "../../service/Category.js";
 import Table from "../../components/table/index.jsx";
 import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
+import { useSelector } from "react-redux";
+import { getRfpQuotes } from "../../service/Rfp.js";
+import { useLocation } from "react-router-dom";
 
-const Categories = () => {
-  const [categories, setCategories] = useState(null);
+const RpfQutes = () => {
+  const [rfpQuotesList, setRfpQuotesList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
+  const { token } = useSelector((state) => state.auth);
+  const { id } = useParams();
+  const location = useLocation();
+  const { rfpId, quantity } = location.state || {};
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchRfpQuotes = async () => {
       setIsLoading(true);
       try {
-        const res = await getCategories();
-        const cats = Object.values(res?.data?.categories || {});
-        setCategories(cats);
-        console.log(res?.data?.categories);
+        if (!id) return;
+        const res = await getRfpQuotes(id, token);
+        const rfpQuotes = Object.values(res?.data?.quotes || {});
+        setRfpQuotesList(rfpQuotes);
+        console.log(res?.data?.quotes);
       } catch (error) {
         console.error(error);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchCategories();
-  }, []);
+    fetchRfpQuotes();
+  }, [id]);
 
   const offset = currentPage * itemsPerPage;
-  const currentPageData = categories?.slice(offset, offset + itemsPerPage);
-  const pageCount = categories
-    ? Math.ceil(categories.length / itemsPerPage)
+  const currentPageData = rfpQuotesList?.slice(offset, offset + itemsPerPage);
+  const pageCount = rfpQuotesList
+    ? Math.ceil(rfpQuotesList?.length / itemsPerPage)
     : 0;
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
 
-  const handleStatus = (row) => {
-    console.log("Clickedd", row);
-  };
-
   const columns = [
     {
-      header: "S. No.",
+      header: "S No.",
       render: (row, rowIndex) => currentPage * itemsPerPage + rowIndex + 1,
     },
     {
-      header: "Categories Name",
+      header: "RFP No.",
+      render: () => rfpId,
+    },
+    {
+      header: "Item Name",
       accessor: "name",
     },
     {
-      header: "Status",
-      render: (row) => (
-        <span
-          className={`badge badge-pill ${
-            row.status === "Active" ? "badge-success" : "badge-danger"
-          }`}
-        >
-          {row?.status?.toUpperCase()}
-        </span>
-      ),
+      header: "Vendor Id",
+      accessor: "vendor_id",
     },
     {
-      header: "Action",
-      render: (row) => (
-        <span
-          className={`fst-italic ${
-            row.status === "Active" ? "text-danger" : "text-success"
-          }`}
-          onClick={() => handleStatus(row)}
-        >
-          {row.status === "Active" ? "Deactivate" : "Activate"}
-        </span>
-      ),
+      header: "Vendor Price",
+      accessor: "item_price",
+    },
+    {
+      header: "Quantity",
+      render: () => quantity,
+    },
+    {
+      header: "Total Price",
+      accessor: "total_cost",
     },
   ];
 
@@ -85,32 +84,25 @@ const Categories = () => {
         <BeatLoader />
       </div>
     );
+
   return (
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
-        <h5 className="mb-0">Categories</h5>
+        <h5 className="mb-0">RFP Quotes</h5>
 
         <div className="page-title-right">
           <ol className="breadcrumb m-0">
             <li className="breadcrumb-item">
               <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
             </li>
-            <li className="breadcrumb-item active">Categories</li>
+            <li className="breadcrumb-item">
+              <Link to={ROUTES.RFP_LIST}>RFP</Link>
+            </li>
+            <li className="breadcrumb-item active">RFP Quotes</li>
           </ol>
         </div>
       </div>
-      <Table
-        title={"Categories"}
-        data={currentPageData}
-        headerAction={
-          <Link to={ROUTES.ADD_CATEGORY}>
-            <button className="btn btn-sm btn-success">
-              <i className="mdi mdi-plus"></i> Add Category
-            </button>
-          </Link>
-        }
-        columns={columns}
-      />
+      <Table title={"RFP Quotes"} data={currentPageData} columns={columns} />
       <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
@@ -134,4 +126,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default RpfQutes;

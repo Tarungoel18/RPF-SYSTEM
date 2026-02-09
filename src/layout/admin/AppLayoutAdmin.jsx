@@ -34,9 +34,9 @@ const AppLayoutAdmin = () => {
               </span>
               &nbsp;&nbsp;
               {/* //TODO-> change logout button style */}
-              <button className=""  onClick={handleLogout}>
+              <span className="text-danger cursor-pointer"  onClick={handleLogout}>
                 Logout
-              </button>
+              </span>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ import "./assets/css/icons.min.css";
 import "./assets/css/style.css";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import AppRoutes from "./router/AppROutes";
+import AppRoutes from "./router/AppRoutes";
 import AuthRoutes from "./router/AuthRoutes";
 
 function App() {

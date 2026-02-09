@@ -5,15 +5,12 @@ const Table = ({ title, columns, data, headerAction }) => {
       <div className="col-lg-12">
         <div className="card">
           <div className="card-body">
-
             <div className="TableHeader">
               <div className="row">
                 <div className="col-lg-3">
                   <h4 className="card-title">{title}</h4>
                 </div>
-                <div className="col-lg-9 text-right">
-                  {headerAction}
-                </div>
+                <div className="col-lg-9 text-right">{headerAction}</div>
               </div>
             </div>
 
@@ -50,7 +47,6 @@ const Table = ({ title, columns, data, headerAction }) => {
                 </tbody>
               </table>
             </div>
-
           </div>
         </div>
       </div>

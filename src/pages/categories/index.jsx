@@ -3,16 +3,21 @@ import { getCategories } from "./service/getCategories";
 import Table from "../../components/table/index.jsx";
 import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 const Categories = () => {
   const [categories, setCategories] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage] = useState(5);
+
   useEffect(() => {
     const fetchCategories = async () => {
       setIsLoading(true);
       try {
         const res = await getCategories();
-        setCategories(res?.data?.categories);
+        const cats = Object.values(res?.data?.categories)
+        setCategories(cats);
         console.log(res?.data?.categories);
       } catch (error) {
         console.error(error);
@@ -22,6 +27,16 @@ const Categories = () => {
     };
     fetchCategories();
   }, []);
+
+  const offset = currentPage * itemsPerPage;
+  const currentPageData = categories?.slice(offset, offset + itemsPerPage);
+  const pageCount = categories
+    ? Math.ceil(categories.length / itemsPerPage)
+    : 0;
+
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
   const handleStatus = (row) => {
     //TODO-> Change according to the api
@@ -51,16 +66,15 @@ const Categories = () => {
     },
     {
       header: "Action",
-      //TODO-> Change Style
       render: (row) => (
-        <button
-          className={`btn btn-sm ${
-            row.status === "Active" ? "btn-danger" : "btn-success"
+        <span
+          className={`fst-italic ${
+            row.status === "Active" ? "text-danger" : "text-success"
           }`}
           onClick={() => handleStatus(row)}
         >
           {row.status === "Active" ? "Deactivate" : "Activate"}
-        </button>
+        </span>
       ),
     },
   ];
@@ -73,12 +87,11 @@ const Categories = () => {
     );
   return (
     <div className="d-flex flex-column pt-1 px-3">
-      {/* //TODO-> Add Heading and Breadcrumb */}
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Categories</h5>
 
         <div className="page-title-right">
-          <ol class="breadcrumb m-0">
+          <ol className="breadcrumb m-0">
             <li className="breadcrumb-item">
               <Link to="/dashboard-admin">Home</Link>
             </li>
@@ -88,7 +101,7 @@ const Categories = () => {
       </div>
       <Table
         title={"Categories"}
-        data={categories}
+        data={currentPageData}
         headerAction={
           <Link to="/add-category">
             <button className="btn btn-sm btn-success">
@@ -97,6 +110,25 @@ const Categories = () => {
           </Link>
         }
         columns={columns}
+      />
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={1}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        breakClassName={"page-item"}
+        breakLinkClassName={"page-link"}
+        activeClassName={"active"}
       />
     </div>
   );

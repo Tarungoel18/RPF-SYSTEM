@@ -1,8 +1,8 @@
 import axiosInstance from "../../../service/axiosInstance";
 
-export const addCategory = async (payload) => {
+export const addCategory =  (payload,token) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  axiosInstance.post("/categories", payload, config);
+ return axiosInstance.post("/categories", payload, config);
 };

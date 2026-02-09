@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
+import { addCategory } from "./service/addCategory.js";
 import { useSelector } from "react-redux";
 
 const AddCategory = () => {
-  const {token} = useSelector((state) => state.auth)
+  const { token } = useSelector((state) => state.auth);
   const validationSchema = Yup.object({
     category: Yup.string().required("Category is required"),
   });
@@ -14,18 +15,24 @@ const AddCategory = () => {
     category: "",
   };
 
-  const handleSubmit = (values, { resetForm }) => {
-    try{
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
       const formData = new FormData();
-    formData.append()
-    }
-    catch(error){
-      console.error(error)
+      formData.append("name", values.category);
+      const res = await addCategory(formData, token);
+      if (res?.data?.response === "success") {
+        toast.success("Category added successfully");
+      } else {
+        toast.error(res?.data?.error);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      resetForm();
     }
   };
   return (
     <div className="d-flex flex-column pt-1 px-3">
-      {/* //TODO-> Add Heading and Breadcrumb */}
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Add Category</h5>
 

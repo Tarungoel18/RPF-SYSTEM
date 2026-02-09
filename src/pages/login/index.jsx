@@ -1,4 +1,4 @@
-import { login } from "./service/login";
+import { login } from "../../service/Auth.js";
 import toast from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/slices/authslice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { ROLE } from "../../constants/AppConst";
+import { ROUTES } from "../../constants/RoutesConst";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -42,11 +44,11 @@ const Login = () => {
         );
         toast.success("User logged in successfully");
 
-        if (res?.data?.type === "admin") {
+        if (res?.data?.type === ROLE.ADMIN) {
           //TODO-> move route to constant
-          navigate("/dashboard-admin");
+          navigate(ROUTES.ADMIN_DASHBOARD);
         } else {
-          navigate("/dashboard-vendor");
+          navigate(ROUTES.VENDOR_DASHBOARD);
         }
       } else {
         toast.error(res?.data?.error);
@@ -173,7 +175,7 @@ const Login = () => {
                         </div>
 
                         <div className="mt-4 text-center">
-                          <Link to="/signup" className="text-muted">
+                          <Link to={ROUTES.SIGNUP} className="text-muted">
                             <i className="mdi mdi-lock mr-1"></i> Register as
                             Vendor
                           </Link>

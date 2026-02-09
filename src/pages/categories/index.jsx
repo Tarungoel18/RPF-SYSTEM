@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { getCategories } from "./service/getCategories";
+import { getCategories } from "../../service/Category.js";
 import Table from "../../components/table/index.jsx";
 import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import { ROUTES } from "../../constants/RoutesConst.js";
 
 const Categories = () => {
   const [categories, setCategories] = useState(null);
@@ -93,7 +94,7 @@ const Categories = () => {
         <div className="page-title-right">
           <ol className="breadcrumb m-0">
             <li className="breadcrumb-item">
-              <Link to="/dashboard-admin">Home</Link>
+              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
             </li>
             <li className="breadcrumb-item active">Categories</li>
           </ol>
@@ -103,7 +104,7 @@ const Categories = () => {
         title={"Categories"}
         data={currentPageData}
         headerAction={
-          <Link to="/add-category">
+          <Link to={ROUTES.ADD_CATEGORY}>
             <button className="btn btn-sm btn-success">
               <i className="mdi mdi-plus"></i> Add Category
             </button>

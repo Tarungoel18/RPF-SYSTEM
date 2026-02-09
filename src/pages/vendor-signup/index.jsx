@@ -1,10 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { register } from "./service/register";
-import { getCategory } from "./service/getCategory";
+import { register } from "../../service/Auth.js";
+import { getCategory } from "../../service/Category.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../../constants/RoutesConst";
 
 const VendorSignUp = () => {
   const [categories, setCategories] = useState(null);
@@ -79,7 +80,7 @@ const VendorSignUp = () => {
       .matches(/^\d{10}$/, "Phone Number must be exactly 10 digits"),
   });
 
-  const handleSubmit = async (values, { setSubmitting,resetForm }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     console.log(values);
     //TODO-> Handle Category Payload
     try {
@@ -106,7 +107,7 @@ const VendorSignUp = () => {
       toast.error("Something went wrong");
     } finally {
       setSubmitting(false);
-      resetForm()
+      resetForm();
     }
   };
   return (
@@ -385,12 +386,11 @@ const VendorSignUp = () => {
                               {isSubmitting ? "Registerring " : "Register"}
                             </button>
                           </div>
-                             <div className="mt-4 text-center">
-                          <Link to="/login" className="text-muted">
-                            <i className="mdi mdi-lock mr-1"></i> Login
-                            
-                          </Link>
-                        </div>
+                          <div className="mt-4 text-center">
+                            <Link to={ROUTES.LOGIN} className="text-muted">
+                              <i className="mdi mdi-lock mr-1"></i> Login
+                            </Link>
+                          </div>
                         </div>
                       </Form>
                     )}

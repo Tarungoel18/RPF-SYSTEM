@@ -4,6 +4,7 @@ import { logout } from "../../redux/slices/authslice.js";
 import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import "./vendor.css"
+import { ROUTES } from "../../constants/RoutesConst.js";
 //TODO-> Remove inline css and handle left navbar
 const AppLayoutVendor = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const AppLayoutVendor = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/categories" className="waves-effect hoverWhite">
+                <Link to={ROUTES.CATEGORIES} className="waves-effect hoverWhite">
                   <i className="mdi mdi-weather-night"></i>
                   <span>Categories</span>
                 </Link>

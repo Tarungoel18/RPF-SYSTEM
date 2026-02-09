@@ -4,6 +4,7 @@ import { logout } from "../../redux/slices/authslice.js";
 import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import "./admin.css"
+import { ROUTES } from "../../constants/RoutesConst.js";
 //TODO-> Remove inline css and handle left navbar and handle Breadcrumbs
 
 const AppLayoutAdmin = () => {
@@ -49,13 +50,13 @@ const AppLayoutAdmin = () => {
             <ul className="metismenu list-unstyled" id="side-menu">
               <li>
                 {/* //TODO-> Use variable instead of hardcoding them in all the file */}
-                <Link to="/dashboard-admin" className="waves-effect hoverWhite">
+                <Link to={ROUTES.ADMIN_DASHBOARD} className="waves-effect hoverWhite">
                   <i className="mdi mdi-file-document-box-outline"></i>
                   <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link to="/categories" className="waves-effect hoverWhite">
+                <Link to={ROUTES.CATEGORIES} className="waves-effect hoverWhite">
                   <i className="mdi mdi-receipt"></i>
                   <span>Categories</span>
                 </Link>
@@ -73,7 +74,7 @@ const AppLayoutAdmin = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/categories" className="waves-effect hoverWhite">
+                <Link to={ROUTES.CATEGORIES} className="waves-effect hoverWhite">
                   <i className="mdi mdi-weather-night"></i>
                   <span>Categories</span>
                 </Link>

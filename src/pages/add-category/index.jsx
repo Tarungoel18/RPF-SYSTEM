@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import { addCategory } from "./service/addCategory.js";
+import { addCategory } from "../../service/Category.js";
 import { useSelector } from "react-redux";
+import { ROUTES } from "../../constants/RoutesConst.js";
 
 const AddCategory = () => {
   const { token } = useSelector((state) => state.auth);
@@ -39,10 +40,10 @@ const AddCategory = () => {
         <div className="page-title-right">
           <ol className="breadcrumb m-0">
             <li className="breadcrumb-item">
-              <Link to="/dashboard-admin">Home</Link>
+              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
             </li>
             <li className="breadcrumb-item">
-              <Link to="/categories">Categories</Link>
+              <Link to={ROUTES.CATEGORIES}>Categories</Link>
             </li>
             <li className="breadcrumb-item active">Add Category</li>
           </ol>

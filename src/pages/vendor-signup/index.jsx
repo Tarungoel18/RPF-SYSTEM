@@ -90,7 +90,7 @@ const VendorSignUp = () => {
       formData.append("password", values.password);
       formData.append("revenue", values.revenue);
       formData.append("no_of_employees", values.noOfEmployees);
-      formData.append("category", categories);
+      formData.append("category", values.categories.join(","));
       formData.append("pancard_no", values.panNo);
       formData.append("gst_no", values.gstNumber);
       formData.append("mobile", values.phoneNo);
@@ -149,7 +149,7 @@ const VendorSignUp = () => {
                         <div className="row">
                           <div className="col-md-12 col-lg-6 col-xl-6">
                             <div className="form-group">
-                              <label htmlFor="firstname">
+                              <label htmlFor="firstName">
                                 First name<em>*</em>
                               </label>
                               <Field
@@ -358,6 +358,7 @@ const VendorSignUp = () => {
                                 name="categories"
                                 multiple
                                 className="form-control"
+                                id="categories"
                               >
                                 <option value="">All Category</option>
                                 {categories?.map((cat) => (

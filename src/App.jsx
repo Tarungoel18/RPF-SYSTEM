@@ -6,13 +6,15 @@ import "./assets/css/icons.css";
 import "./assets/css/icons.min.css";
 import "./assets/css/style.css";
 import { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import AppRoutes from "./router/AppROutes";
+import AuthRoutes from "./router/AuthRoutes";
 
-import VendorSignUp from "./pages/vendor-signup";
-import Login from "./pages/login";
 function App() {
+  const { isAuthenticated } = useSelector((state) => state.auth);
   return (
     <>
-      <VendorSignUp />
+      {isAuthenticated ? <AppRoutes /> : <AuthRoutes />}
       <Toaster position="top-center" reverseOrder={false} />
     </>
   );

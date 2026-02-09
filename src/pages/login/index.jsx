@@ -1,10 +1,14 @@
-import { useState } from "react";
 import { login } from "./service/login";
 import toast from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../redux/slices/authslice";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email format")
@@ -19,12 +23,29 @@ const Login = () => {
       const formData = new FormData();
       formData.append("email", values.email);
       formData.append("password", values.password);
+      //TODO-> Remove console.log
 
       const res = await login(formData);
       console.log(res);
 
       if (res?.data?.response === "success") {
+        dispatch(
+          loginSuccess({
+            token: res?.data?.token,
+            type: res?.data?.type,
+            name: res?.data?.name,
+            user_id: res?.data?.user_id,
+            email: res?.data?.email,
+          }),
+        );
         toast.success("User logged in successfully");
+
+        if (res?.data?.type === "admin") {
+          //TODO-> move route to constant
+          navigate("/dashboard-admin");
+        } else {
+          navigate("/dashboard-vendor")
+        }
       } else {
         toast.error(res?.data?.error);
       }

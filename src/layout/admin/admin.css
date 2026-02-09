@@ -1,0 +1,9 @@
+.bg-navy{
+    background-color: #27333A;
+}
+
+.hoverWhite:hover,
+.hoverWhite:hover span,
+.hoverWhite:hover i {
+  color: white !important;
+}

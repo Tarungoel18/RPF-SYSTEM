@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/slices/authslice";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const Login = () => {
           //TODO-> move route to constant
           navigate("/dashboard-admin");
         } else {
-          navigate("/dashboard-vendor")
+          navigate("/dashboard-vendor");
         }
       } else {
         toast.error(res?.data?.error);
@@ -144,44 +146,44 @@ const Login = () => {
                           <h5 className="font-size-14 mb-3">Sign in with</h5>
                           <ul className="list-inline">
                             <li className="list-inline-item">
-                              <a
+                              <button
                                 href="#"
                                 className="social-list-item bg-primary text-white border-primary"
                               >
                                 <i className="mdi mdi-facebook"></i>
-                              </a>
+                              </button>
                             </li>
                             <li className="list-inline-item">
-                              <a
+                              <button
                                 href="#"
                                 className="social-list-item bg-info text-white border-info"
                               >
                                 <i className="mdi mdi-twitter"></i>
-                              </a>
+                              </button>
                             </li>
                             <li className="list-inline-item">
-                              <a
+                              <button
                                 href="#"
                                 className="social-list-item bg-danger text-white border-danger"
                               >
                                 <i className="mdi mdi-google"></i>
-                              </a>
+                              </button>
                             </li>
                           </ul>
                         </div>
 
                         <div className="mt-4 text-center">
-                          <a href="#" className="text-muted">
+                          <Link to="/signup" className="text-muted">
                             <i className="mdi mdi-lock mr-1"></i> Register as
                             Vendor
-                          </a>
+                          </Link>
                         </div>
 
                         <div className="mt-4 text-center">
-                          <a href="#" className="text-muted">
+                          <Link className="text-muted">
                             <i className="mdi mdi-lock mr-1"></i> Forgot your
                             password?
-                          </a>
+                          </Link>
                         </div>
                       </Form>
                     )}

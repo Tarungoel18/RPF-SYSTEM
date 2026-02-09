@@ -1,32 +1,39 @@
 import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import AppLayoutAdmin from "../layout/admin/AppLayoutAdmin";
 import AppLayoutVendor from "../layout/vendor/AppLayoutVendor";
-import AdminDashboard from "../pages/admin-dashboard";
-import VendorDashboard from "../pages/vendor-dashboard";
-import Categories from "../pages/categories";
-import AddCategory from "../pages/add-category";
-//TODO->Lazy loading
+import { BeatLoader } from "react-spinners";
+
+const AdminDashboard = lazy(() => import("../pages/admin-dashboard"));
+const VendorDashboard = lazy(() => import("../pages/vendor-dashboard"));
+const Categories = lazy(() => import("../pages/categories"));
+const AddCategory = lazy(() => import("../pages/add-category"));
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-        <Route element={<AppLayoutAdmin />}>
-          <Route path="/dashboard-admin" element={<AdminDashboard />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/add-category" element={<AddCategory />} />
+    <Suspense fallback={<BeatLoader/>}>
+      <Routes>
+        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+          <Route element={<AppLayoutAdmin />}>
+            <Route path="/dashboard-admin" element={<AdminDashboard />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/add-category" element={<AddCategory />} />
+          </Route>
         </Route>
-      </Route>
-      <Route element={<ProtectedRoute allowedRoles={["vendor"]} />}>
-        <Route element={<AppLayoutVendor />}>
-          <Route path="/dashboard-vendor" element={<VendorDashboard />} />
+
+        <Route element={<ProtectedRoute allowedRoles={["vendor"]} />}>
+          <Route element={<AppLayoutVendor />}>
+            <Route path="/dashboard-vendor" element={<VendorDashboard />} />
+          </Route>
         </Route>
-      </Route>
-      {/* //TODO->Create a unauthorized page with link to navigate to dashboard*/}
-      <Route path="*" element={<>Unauthorized</>} />
-    </Routes>
+
+        {/* TODO -> Create an unauthorized page */}
+        <Route path="*" element={<>Unauthorized</>} />
+      </Routes>
+    </Suspense>
   );
 };
 
 export default AppRoutes;
+

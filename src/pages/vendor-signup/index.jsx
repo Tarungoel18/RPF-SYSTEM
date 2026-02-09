@@ -4,10 +4,10 @@ import { register } from "./service/register";
 import { getCategory } from "./service/getCategory";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const VendorSignUp = () => {
   const [categories, setCategories] = useState(null);
-  //TODO-> Whether to show only the active categories or all the categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -79,7 +79,7 @@ const VendorSignUp = () => {
       .matches(/^\d{10}$/, "Phone Number must be exactly 10 digits"),
   });
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting,resetForm }) => {
     console.log(values);
     //TODO-> Handle Category Payload
     try {
@@ -95,7 +95,6 @@ const VendorSignUp = () => {
       formData.append("gst_no", values.gstNumber);
       formData.append("mobile", values.phoneNo);
       const res = await register(formData);
-      console.log(res);
 
       if (res?.data?.response === "success") {
         toast.success("Vendor registered successfully");
@@ -107,6 +106,7 @@ const VendorSignUp = () => {
       toast.error("Something went wrong");
     } finally {
       setSubmitting(false);
+      resetForm()
     }
   };
   return (
@@ -385,6 +385,12 @@ const VendorSignUp = () => {
                               {isSubmitting ? "Registerring " : "Register"}
                             </button>
                           </div>
+                             <div className="mt-4 text-center">
+                          <Link to="/login" className="text-muted">
+                            <i className="mdi mdi-lock mr-1"></i> Login
+                            
+                          </Link>
+                        </div>
                         </div>
                       </Form>
                     )}

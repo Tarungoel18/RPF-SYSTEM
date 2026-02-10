@@ -106,13 +106,12 @@ const AddRfp = () => {
       const res = await addRpf(formData);
       if (res?.data?.response === "success") {
         toast.success("RPF Added Successfully");
+        resetForm();
       } else {
         toast.error(res?.data?.errors?.[0]);
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      resetForm();
     }
   };
 

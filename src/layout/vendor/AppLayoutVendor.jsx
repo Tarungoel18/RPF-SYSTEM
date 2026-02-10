@@ -1,9 +1,9 @@
-import velocityLogo from "../../assets/images/velocity_logo.png"
+import velocityLogo from "../../assets/images/velocity_logo.png";
 import { useSelector } from "react-redux";
 import { logout } from "../../redux/slices/authslice.js";
 import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
-import "./vendor.css"
+import "./vendor.css";
 import { ROUTES } from "../../constants/RoutesConst.js";
 //TODO-> Remove inline css and handle left navbar
 const AppLayoutVendor = () => {
@@ -17,9 +17,7 @@ const AppLayoutVendor = () => {
     <div id="layout-wrapper">
       <header id="page-topbar">
         <div className="navbar-header">
-          <div
-            className="d-flex bg-navy"
-          >
+          <div className="d-flex bg-navy">
             <div className="navbar-brand-box">
               <span className="logo-lg">
                 <img src={velocityLogo} alt="Velocity Logo" height="75" />
@@ -34,7 +32,10 @@ const AppLayoutVendor = () => {
               </span>
               &nbsp;&nbsp;
               {/* //TODO-> change logout button style */}
-              <button className=""  onClick={handleLogout}>
+              <button
+                className="button-unset text-danger"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </div>
@@ -49,33 +50,18 @@ const AppLayoutVendor = () => {
             <ul className="metismenu list-unstyled" id="side-menu">
               <li>
                 {/* //TODO-> Use variable instead of hardcoding them in all the file */}
-                <Link to={ROUTES.VENDOR_DASHBOARD} className="waves-effect hoverWhite">
+                <Link
+                  to={ROUTES.VENDOR_DASHBOARD}
+                  className="waves-effect hoverWhite"
+                >
                   <i className="mdi mdi-file-document-box-outline"></i>
                   <span>Dashboard</span>
                 </Link>
               </li>
               <li>
-                <Link to="/vendors" className="waves-effect hoverWhite">
+                <Link to={ROUTES.RFP_FOR_QUOTES} className="waves-effect hoverWhite">
                   <i className="mdi mdi-receipt"></i>
-                  <span>Vendors</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/rpf-list" className="waves-effect hoverWhite">
-                  <i className="mdi mdi-flip-vertical"></i>
-                  <span>RFP Lists</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/users" className="waves-effect hoverWhite">
-                  <i className="mdi mdi-apps"></i>
-                  <span>User Management</span>
-                </Link>
-              </li>
-              <li>
-                <Link to={ROUTES.CA} className="waves-effect hoverWhite">
-                  <i className="mdi mdi-weather-night"></i>
-                  <span>Categories</span>
+                  <span>RFP For Quotes</span>
                 </Link>
               </li>
             </ul>

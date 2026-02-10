@@ -1,0 +1,128 @@
+import { ROUTES } from "../../constants/RoutesConst";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Link, useParams } from "react-router-dom";
+import { applyForRfp } from "../../service/Rfp";
+import toast from "react-hot-toast";
+
+const ApplyRfp = () => {
+  const params = useParams();
+  console.log(params);
+  const validationSchema = Yup.object({
+    itemPrice: Yup.number()
+      .required("Item Price is required")
+      .min(0, "Item Price cannot be negative"),
+    totalCost: Yup.number()
+      .required("Total Cost is required")
+      .min(0, "Total Cost cannot be negative"),
+  });
+
+  const initialValues = {
+    itemPrice: "",
+    totalCost: "",
+  };
+
+  const handleSubmit = async (values, { resetForm }) => {
+    console.log("Form values:", values);
+    try {
+      const formData = new FormData();
+      formData.append("item_price", values.itemPrice);
+      formData.append("total_cost", values.totalCost);
+      const res = await applyForRfp(params?.id, formData);
+      if (res?.data?.response === "success") {
+        toast.success("Quote Submitted successfully");
+        resetForm();
+      } else {
+        toast.error(res?.data?.errors?.[0]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div className="d-flex flex-column pt-1 px-3">
+      <div className="page-title-box d-flex align-items-center justify-content-between">
+        <h5 className="mb-0">Apply RFP</h5>
+
+        <div className="page-title-right">
+          <ol className="breadcrumb m-0">
+            <li className="breadcrumb-item">
+              <Link to={ROUTES.VENDOR_DASHBOARD}>Home</Link>
+            </li>
+            <li className="breadcrumb-item">
+              <Link to={ROUTES.RFP_FOR_QUOTES}>RFP</Link>
+            </li>
+            <li className="breadcrumb-item active">Apply Quote</li>
+          </ol>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-lg-6">
+          <div className="card">
+            <div className="card-body">
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                {({ isSubmitting }) => (
+                  <Form>
+                    <div className="form-group">
+                      <label htmlFor="itemPrice">
+                        Item Price <em>*</em>
+                      </label>
+                      <Field
+                        type="number"
+                        name="itemPrice"
+                        id="itemPrice"
+                        className="form-control"
+                        placeholder="Enter item price"
+                      />
+                      <ErrorMessage
+                        name="itemPrice"
+                        component="div"
+                        className="text-danger mt-1"
+                      />
+                    </div>
+
+                    <div className="form-group mt-3">
+                      <label htmlFor="totalCost">
+                        Total Cost <em>*</em>
+                      </label>
+                      <Field
+                        type="number"
+                        name="totalCost"
+                        id="totalCost"
+                        className="form-control"
+                        placeholder="Enter total cost"
+                      />
+                      <ErrorMessage
+                        name="totalCost"
+                        component="div"
+                        className="text-danger mt-1"
+                      />
+                    </div>
+
+                    <div className="text-right mt-4">
+                      <button
+                        type="submit"
+                        className="btn btn-success"
+                        disabled={isSubmitting}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ApplyRfp;

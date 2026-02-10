@@ -33,12 +33,12 @@ const AppLayoutAdmin = () => {
               </span>
               &nbsp;&nbsp;
               {/* //TODO-> change logout button style */}
-              <span
-                className="text-danger cursor-pointer"
+              <button
+                className="button-unset text-danger"
                 onClick={handleLogout}
               >
                 Logout
-              </span>
+              </button>
             </div>
           </div>
         </div>

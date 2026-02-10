@@ -9,5 +9,7 @@ export const ROUTES = {
   RFP_LIST:"/rfp-list",
   QUOTES:"/rfp-quotes",
   ADD_RFP:"/add-rfp",
+  RFP_FOR_QUOTES:"/rfp-for-quotes",
+  APPLY_RFP:"/apply-rfp",
   NOT_FOUND: "*",
 };

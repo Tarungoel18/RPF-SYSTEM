@@ -15,6 +15,8 @@ const VendorsList = lazy(() => import("../pages/vendors-list"));
 const RfpList = lazy(() => import("../pages/rfp-list"));
 const RpfQuotes = lazy(() => import("../pages/rpf-quotes"));
 const AddRfp = lazy(() => import("../pages/add-rfp"));
+const RfpForQuotes = lazy(() => import("../pages/rfp-for-quotes"));
+const ApplyRfp = lazy(() => import("../pages/apply-rfp"));
 
 const AppRoutes = () => {
   return (
@@ -38,6 +40,8 @@ const AppRoutes = () => {
               path={ROUTES.VENDOR_DASHBOARD}
               element={<VendorDashboard />}
             />
+            <Route path={ROUTES.RFP_FOR_QUOTES} element={<RfpForQuotes />} />
+            <Route path={`${ROUTES.APPLY_RFP}/:id`} element={<ApplyRfp />} />
           </Route>
         </Route>
 

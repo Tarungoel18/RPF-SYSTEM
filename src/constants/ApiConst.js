@@ -8,6 +8,8 @@ const API = {
   CLOSE_RFP: "/rfp/closerfp",
   RFP_QUOTES: "/rfp/quotes",
   CREATE_RPF: "/createrfp",
+  RFP_BY_USER_ID: "/rfp/getrfp",
+  RFP_APPLY: "/rfp/apply",
 };
 
 export default API;

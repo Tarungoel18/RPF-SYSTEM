@@ -16,3 +16,11 @@ export const getRfpQuotes = (id) => {
 export const addRpf = (payload) => {
   return axiosInstance.post(API.CREATE_RPF, payload);
 };
+
+export const getRfpsByUserId = (id) => {
+  return axiosInstance.get(`${API.RFP_BY_USER_ID}/${id}`);
+};
+
+export const applyForRfp = (id,payload) => {
+  return axiosInstance.put(`${API.RFP_APPLY}/${id}`,payload);
+};

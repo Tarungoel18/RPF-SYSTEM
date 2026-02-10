@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ROUTES } from "../constants/RoutesConst";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -24,6 +25,12 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("role");
+      window.location.href = ROUTES.LOGIN;
+    }
     return Promise.reject(error);
   },
 );

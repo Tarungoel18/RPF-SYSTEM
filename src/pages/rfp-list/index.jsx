@@ -107,12 +107,12 @@ const RfpList = () => {
             <i className="mdi mdi-file-document-outline fs-5"></i>
           </Link>
           {row.status === "open" && (
-            <span
-              className="fst-italic cursor-pointer text-danger"
+            <button
+              className="fst-italic button-unset text-danger"
               onClick={() => handleStatus(row)}
             >
               Close
-            </span>
+            </button>
           )}
         </div>
       ),

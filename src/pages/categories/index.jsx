@@ -5,7 +5,7 @@ import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
-
+import "./index.css";
 const Categories = () => {
   const [categories, setCategories] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -67,14 +67,14 @@ const Categories = () => {
     {
       header: "Action",
       render: (row) => (
-        <span
-          className={`fst-italic ${
+        <button
+          className={`fst-italic button-unset ${
             row.status === "Active" ? "text-danger" : "text-success"
           }`}
           onClick={() => handleStatus(row)}
         >
           {row.status === "Active" ? "Deactivate" : "Activate"}
-        </span>
+        </button>
       ),
     },
   ];

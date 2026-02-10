@@ -105,14 +105,14 @@ const VendorsList = () => {
     {
       header: "Action",
       render: (row) => (
-        <span
+        <button
           className={`fst-italic cursor-pointer ${
             row.status === "Approved" ? "text-danger" : "text-success"
-          }`}
+          } button-unset `}
           onClick={() => handleStatus(row)}
         >
           {row.status === "Approved" ? "" : "Approve"}
-        </span>
+        </button>
       ),
     },
   ];

@@ -28,6 +28,7 @@ const ApplyRfp = () => {
       const formData = new FormData();
       formData.append("item_price", values.itemPrice);
       formData.append("total_cost", values.totalCost);
+      formData.append("_method","put")
       const res = await applyForRfp(params?.id, formData);
       if (res?.data?.response === "success") {
         toast.success("Quote Submitted successfully");

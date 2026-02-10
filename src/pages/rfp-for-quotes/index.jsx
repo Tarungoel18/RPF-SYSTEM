@@ -4,15 +4,19 @@ import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
-import toast from "react-hot-toast";
-import { applyForRfp, getRfpsByUserId } from "../../service/Rfp.js";
+import { getRfpsByUserId } from "../../service/Rfp.js";
 import { useSelector } from "react-redux";
+import QuoteModal from "./components/modal/index.jsx";
+import "./index.css";
 
 const RfpForQuotes = () => {
   const [rfpList, setRfpList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedRfpId, setSelectedRfpId] = useState(null);
+
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -36,10 +40,14 @@ const RfpForQuotes = () => {
   const currentPageData = rfpList?.slice(offset, offset + itemsPerPage);
   const pageCount = rfpList ? Math.ceil(rfpList?.length / itemsPerPage) : 0;
 
+  const handleViewQuote = (rfpId) => {
+    setSelectedRfpId(rfpId);
+    setShowModal(true);
+  };
+
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
-
 
   const columns = [
     {
@@ -81,12 +89,17 @@ const RfpForQuotes = () => {
           {row?.applied_status === "open" ? (
             <Link
               to={`${ROUTES.APPLY_RFP}/${row.rfp_id}`}
-              className="text-primary"
+              className=" fst-italic text-success"
             >
               Apply
             </Link>
           ) : (
-            <button>View Quote</button>
+            <button
+              className=" fst-italic text-danger btn-unset"
+              onClick={() => handleViewQuote(row.rfp_id)}
+            >
+              View Quote
+            </button>
           )}
         </div>
       ),
@@ -99,6 +112,7 @@ const RfpForQuotes = () => {
         <BeatLoader />
       </div>
     );
+
   return (
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
@@ -133,6 +147,13 @@ const RfpForQuotes = () => {
         breakLinkClassName={"page-link"}
         activeClassName={"active"}
       />
+      {showModal && (
+        <QuoteModal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          rfpId={selectedRfpId}
+        />
+      )}
     </div>
   );
 };

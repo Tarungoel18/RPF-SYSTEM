@@ -22,5 +22,5 @@ export const getRfpsByUserId = (id) => {
 };
 
 export const applyForRfp = (id,payload) => {
-  return axiosInstance.put(`${API.RFP_APPLY}/${id}`,payload);
+  return axiosInstance.post(`${API.RFP_APPLY}/${id}`,payload);
 };

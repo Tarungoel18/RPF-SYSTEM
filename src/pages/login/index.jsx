@@ -191,7 +191,10 @@ const Login = () => {
                         </div>
 
                         <div className="mt-4 text-center">
-                          <Link className="text-muted">
+                          <Link
+                            to={ROUTES.FORGOT_PASSWORD}
+                            className="text-muted"
+                          >
                             <i className="mdi mdi-lock mr-1"></i> Forgot your
                             password?
                           </Link>

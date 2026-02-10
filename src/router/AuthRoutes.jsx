@@ -5,6 +5,8 @@ import { ROUTES } from "../constants/RoutesConst.js";
 const Login = lazy(() => import("../pages/login"));
 const VendorSignUp = lazy(() => import("../pages/vendor-signup"));
 const AdminSignUp = lazy(() => import("../pages/admin-signup"));
+const ForgotPassword = lazy(() => import("../pages/forgot-password"));
+const ResetPassword = lazy(() => import("../pages/reset-password"));
 
 const AuthRoutes = () => {
   return (
@@ -14,6 +16,8 @@ const AuthRoutes = () => {
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.SIGNUP} element={<VendorSignUp />} />
         <Route path={ROUTES.REGISTER_ADMIN} element={<AdminSignUp />} />
+        <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+        <Route path={ROUTES.RESET_PASSWORD} element={<ResetPassword />} />
         <Route
           path={ROUTES.NOT_FOUND}
           element={<Navigate to={ROUTES.LOGIN} replace />}

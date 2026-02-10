@@ -11,6 +11,12 @@ export const register = async (payload) => {
 
 export const registerAdmin = async (payload) => {
   return axiosInstance.post(API.REGISTER_ADMIN, payload);
-}; 
+};
 
+export const forgotPassword = async (payload) => {
+  return axiosInstance.post(API.FORGET_PASSWORD, payload);
+};
 
+export const resetPassword = async (payload) => {
+  return axiosInstance.post(API.RESET_PASSWORD, payload);
+};

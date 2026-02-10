@@ -382,7 +382,7 @@ const VendorSignUp = () => {
                               disabled={isSubmitting}
                             >
                               {/* //TODO -> Change Button Text */}
-                              {isSubmitting ? "Registerring " : "Register"}
+                              {isSubmitting ? "Registering " : "Register"}
                             </button>
                           </div>
                           <div className="mt-4 text-center">

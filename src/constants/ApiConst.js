@@ -11,6 +11,8 @@ const API = {
   RFP_BY_USER_ID: "/rfp/getrfp",
   RFP_APPLY: "/rfp/apply",
   REGISTER_ADMIN: "/registeradmin",
+  FORGET_PASSWORD: "/forgetPassword",
+  RESET_PASSWORD: "/confirmotpresetPassword",
 };
 
 export default API;

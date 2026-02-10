@@ -113,7 +113,7 @@ const AddRfp = () => {
       </div>
 
       <div className="row">
-        <div className="col-lg-12">
+        <div className=" col-lg-12">
           <div className="card">
             <div className="card-body">
               <Formik
@@ -123,7 +123,7 @@ const AddRfp = () => {
               >
                 {({ values, setFieldValue, isSubmitting }) => (
                   <Form>
-                    <div className="form-group">
+                    <div className="form-group mb-3">
                       <label htmlFor="categories">
                         Categories <em>*</em>
                       </label>
@@ -135,7 +135,6 @@ const AddRfp = () => {
                           const categoryId = e.target.value;
                           setFieldValue("category", categoryId);
                           setFieldValue("vendors", []);
-
                           if (categoryId) {
                             try {
                               const res =
@@ -166,161 +165,181 @@ const AddRfp = () => {
                       />
                     </div>
 
-                    <div className="form-group">
-                      <label htmlFor="itemName">
-                        Item Name <em>*</em>
-                      </label>
-                      <Field
-                        type="text"
-                        name="itemName"
-                        id="itemName"
-                        className="form-control"
-                        placeholder="Enter item name"
-                      />
-                      <ErrorMessage
-                        name="itemName"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
-                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="itemName">
+                            Item Name <em>*</em>
+                          </label>
+                          <Field
+                            type="text"
+                            name="itemName"
+                            id="itemName"
+                            className="form-control"
+                            placeholder="Enter item name"
+                          />
+                          <ErrorMessage
+                            name="itemName"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="itemDescription">
-                        Item Description <em>*</em>
-                      </label>
-                      <Field
-                        as="textarea"
-                        name="itemDescription"
-                        id="itemDescription"
-                        className="form-control"
-                        placeholder="Enter item description"
-                      />
-                      <ErrorMessage
-                        name="itemDescription"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
-                    </div>
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="itemDescription">
+                            Item Description <em>*</em>
+                          </label>
+                          <Field
+                            as="textarea"
+                            name="itemDescription"
+                            id="itemDescription"
+                            className="form-control"
+                            placeholder="Enter item description"
+                          />
+                          <ErrorMessage
+                            name="itemDescription"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="rfpNo">
-                        RFP No <em>*</em>
-                      </label>
-                      <Field
-                        type="text"
-                        name="rfpNo"
-                        id="rfpNo"
-                        className="form-control"
-                        placeholder="Enter RFP number"
-                      />
-                      <ErrorMessage
-                        name="rfpNo"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
-                    </div>
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="rfpNo">
+                            RFP No <em>*</em>
+                          </label>
+                          <Field
+                            type="text"
+                            name="rfpNo"
+                            id="rfpNo"
+                            className="form-control"
+                            placeholder="Enter RFP number"
+                          />
+                          <ErrorMessage
+                            name="rfpNo"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="quantity">
-                        Quantity <em>*</em>
-                      </label>
-                      <Field
-                        type="number"
-                        name="quantity"
-                        id="quantity"
-                        className="form-control"
-                        placeholder="Enter quantity"
-                      />
-                      <ErrorMessage
-                        name="quantity"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
-                    </div>
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="quantity">
+                            Quantity <em>*</em>
+                          </label>
+                          <Field
+                            type="number"
+                            name="quantity"
+                            id="quantity"
+                            className="form-control"
+                            placeholder="Enter quantity"
+                          />
+                          <ErrorMessage
+                            name="quantity"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="lastDate">
-                        Last Date <em>*</em>
-                      </label>
-                      <Field
-                        type="date"
-                        name="lastDate"
-                        id="lastDate"
-                        className="form-control"
-                      />
-                      <ErrorMessage
-                        name="lastDate"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
-                    </div>
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="lastDate">
+                            Last Date <em>*</em>
+                          </label>
+                          <Field
+                            type="date"
+                            name="lastDate"
+                            id="lastDate"
+                            className="form-control"
+                          />
+                          <ErrorMessage
+                            name="lastDate"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="minimumPrice">
-                        Minimum Price <em>*</em>
-                      </label>
-                      <Field
-                        type="number"
-                        name="minimumPrice"
-                        id="minimumPrice"
-                        className="form-control"
-                        placeholder="Enter minimum price"
-                      />
-                      <ErrorMessage
-                        name="minimumPrice"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
-                    </div>
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="minimumPrice">
+                            Minimum Price <em>*</em>
+                          </label>
+                          <Field
+                            type="number"
+                            name="minimumPrice"
+                            id="minimumPrice"
+                            className="form-control"
+                            placeholder="Enter minimum price"
+                          />
+                          <ErrorMessage
+                            name="minimumPrice"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="maximumPrice">
-                        Maximum Price <em>*</em>
-                      </label>
-                      <Field
-                        type="number"
-                        name="maximumPrice"
-                        id="maximumPrice"
-                        className="form-control"
-                        placeholder="Enter maximum price"
-                      />
-                      <ErrorMessage
-                        name="maximumPrice"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
-                    </div>
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="maximumPrice">
+                            Maximum Price <em>*</em>
+                          </label>
+                          <Field
+                            type="number"
+                            name="maximumPrice"
+                            id="maximumPrice"
+                            className="form-control"
+                            placeholder="Enter maximum price"
+                          />
+                          <ErrorMessage
+                            name="maximumPrice"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="vendors">
-                        Vendors <em>*</em>
-                      </label>
-                      <Field
-                        as="select"
-                        name="vendors"
-                        multiple
-                        className="form-control"
-                        value={values.vendors}
-                        onChange={(e) => {
-                          const selectedVendorIds = Array.from(
-                            e.target.selectedOptions,
-                            (option) => option.value,
-                          );
-                          setFieldValue("vendors", selectedVendorIds);
-                          console.log(selectedVendorIds);
-                        }}
-                      >
-                        {allVendors?.map((vendor) => (
-                          <option key={vendor?.user_id} value={vendor?.user_id}>
-                            {vendor.name}
-                          </option>
-                        ))}
-                      </Field>
-                      <ErrorMessage
-                        name="vendors"
-                        component="div"
-                        className="text-danger mt-1"
-                      />
+                      <div className="col-md-6">
+                        <div className="form-group mb-3">
+                          <label htmlFor="vendors">
+                            Vendors <em>*</em>
+                          </label>
+                          <Field
+                            as="select"
+                            name="vendors"
+                            multiple
+                            className="form-control"
+                            value={values.vendors}
+                            onChange={(e) => {
+                              const selectedVendorIds = Array.from(
+                                e.target.selectedOptions,
+                                (option) => option.value,
+                              );
+                              setFieldValue("vendors", selectedVendorIds);
+                            }}
+                          >
+                            {allVendors?.map((vendor) => (
+                              <option
+                                key={vendor?.user_id}
+                                value={vendor?.user_id}
+                              >
+                                {vendor.name}
+                              </option>
+                            ))}
+                          </Field>
+                          <ErrorMessage
+                            name="vendors"
+                            component="div"
+                            className="text-danger mt-1"
+                          />
+                        </div>
+                      </div>
                     </div>
 
                     <div className="text-right mt-4">

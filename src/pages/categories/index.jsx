@@ -17,7 +17,7 @@ const Categories = () => {
       setIsLoading(true);
       try {
         const res = await getCategories();
-        const cats = Object.values(res?.data?.categories || {});
+        const cats = Object.values(res?.data?.categories || {}).slice().reverse();
         setCategories(cats);
         console.log(res?.data?.categories);
       } catch (error) {

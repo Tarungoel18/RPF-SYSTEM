@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
 import "./index.css";
+import Breadcrumb from "../../components/breadcrumb/index.jsx";
+import { CATEGORIES_BREADCRUMBS } from "../../constants/AppConst.js";
+
 const Categories = () => {
   const [categories, setCategories] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +20,9 @@ const Categories = () => {
       setIsLoading(true);
       try {
         const res = await getCategories();
-        const cats = Object.values(res?.data?.categories || {}).slice().reverse();
+        const cats = Object.values(res?.data?.categories || {})
+          .slice()
+          .reverse();
         setCategories(cats);
         console.log(res?.data?.categories);
       } catch (error) {
@@ -89,15 +94,7 @@ const Categories = () => {
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Categories</h5>
-
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item active">Categories</li>
-          </ol>
-        </div>
+        <Breadcrumb items={CATEGORIES_BREADCRUMBS} />
       </div>
       <Table
         title={"Categories"}

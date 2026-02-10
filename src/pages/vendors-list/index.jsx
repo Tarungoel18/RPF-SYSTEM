@@ -7,6 +7,8 @@ import { getVendors, approveVendor } from "../../service/Vendors.js";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import "./vendor.css";
+import Breadcrumb from "../../components/breadcrumb/index.jsx";
+import { VENDORS_BREADCRUMBS } from "../../constants/AppConst.js";
 
 const VendorsList = () => {
   const [vendors, setVendors] = useState(null);
@@ -125,15 +127,7 @@ const VendorsList = () => {
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Vendors List</h5>
-
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item active">Vendors</li>
-          </ol>
-        </div>
+        <Breadcrumb items={VENDORS_BREADCRUMBS} />
       </div>
       <Table title={"Vendors"} data={currentPageData} columns={columns} />
       <ReactPaginate

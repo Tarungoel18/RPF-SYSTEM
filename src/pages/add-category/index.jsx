@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { addCategory } from "../../service/Category.js";
-import { ROUTES } from "../../constants/RoutesConst.js";
+import Breadcrumb from "../../components/breadcrumb/index.jsx";
+import { ADD_CATEGORY_BREADCRUMBS } from "../../constants/AppConst.js";
 
 const AddCategory = () => {
   const validationSchema = Yup.object({
@@ -34,18 +34,7 @@ const AddCategory = () => {
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Add Category</h5>
-
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.CATEGORIES}>Categories</Link>
-            </li>
-            <li className="breadcrumb-item active">Add Category</li>
-          </ol>
-        </div>
+        <Breadcrumb items={ADD_CATEGORY_BREADCRUMBS} />
       </div>
 
       <div className="row">

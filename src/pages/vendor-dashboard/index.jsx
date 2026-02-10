@@ -1,3 +1,5 @@
+import Breadcrumb from "../../components/breadcrumb";
+import { HOME_BREADCRUMBS } from "../../constants/AppConst";
 const VendorDashboard = () => {
   return (
     <div className="container-fluid">
@@ -5,13 +7,7 @@ const VendorDashboard = () => {
         <div className="col-12">
           <div className="page-title-box d-flex align-items-center justify-content-between">
             <h4 className="mb-0 font-size-18">Dashboard</h4>
-            <div className="page-title-right">
-              <ol className="breadcrumb m-0">
-                <li className="breadcrumb-item">
-                  <a>Home</a>
-                </li>
-              </ol>
-            </div>
+            <Breadcrumb items={HOME_BREADCRUMBS} />
           </div>
         </div>
       </div>

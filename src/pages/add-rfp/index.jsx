@@ -8,6 +8,8 @@ import { ROUTES } from "../../constants/RoutesConst.js";
 import { getCategories } from "../../service/Category.js";
 import { getVendorsByCategory } from "../../service/Vendors.js";
 import { addRpf } from "../../service/Rfp.js";
+import { RFP_CREATE_BREADCRUMBS } from "../../constants/AppConst.js";
+import Breadcrumb from "../../components/breadcrumb/index.jsx";
 
 const AddRfp = () => {
   const [allCategories, setAllCategories] = useState(null);
@@ -115,22 +117,11 @@ const AddRfp = () => {
   };
 
   return (
-    //TODO-> BREADCRUMBS-> Constant
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">RFP Create</h5>
 
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.RFP_LIST}>RFP</Link>
-            </li>
-            <li className="breadcrumb-item active">RFP Create</li>
-          </ol>
-        </div>
+        <Breadcrumb items={RFP_CREATE_BREADCRUMBS} />
       </div>
 
       <div className="row">

@@ -6,7 +6,8 @@ import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
 import { closeRfp, getRfps } from "../../service/Rfp.js";
 import toast from "react-hot-toast";
-
+import Breadcrumb from "../../components/breadcrumb/index.jsx";
+import { ADMIN_RFP_LIST_BREADCRUMBS } from "../../constants/AppConst.js";
 const RfpList = () => {
   const [rfpList, setRfpList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -128,15 +129,7 @@ const RfpList = () => {
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">RFP List</h5>
-
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item active">RFP List</li>
-          </ol>
-        </div>
+        <Breadcrumb items={ADMIN_RFP_LIST_BREADCRUMBS} />
       </div>
       <Table
         title={"RFP"}

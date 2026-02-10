@@ -8,6 +8,8 @@ import { getRfpsByUserId } from "../../service/Rfp.js";
 import { useSelector } from "react-redux";
 import QuoteModal from "./components/modal/index.jsx";
 import "./index.css";
+import Breadcrumb from "../../components/breadcrumb/index.jsx";
+import { RFP_LIST_BREADCRUMBS } from "../../constants/AppConst.js";
 
 const RfpForQuotes = () => {
   const [rfpList, setRfpList] = useState(null);
@@ -118,14 +120,7 @@ const RfpForQuotes = () => {
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">RFP List</h5>
 
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.VENDOR_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item active">RFP List</li>
-          </ol>
-        </div>
+        <Breadcrumb items={RFP_LIST_BREADCRUMBS} />
       </div>
       <Table title={"RFP"} data={currentPageData} columns={columns} />
       <ReactPaginate

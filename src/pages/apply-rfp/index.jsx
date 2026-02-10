@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { Link, useParams } from "react-router-dom";
 import { applyForRfp } from "../../service/Rfp";
 import toast from "react-hot-toast";
+import Breadcrumb from "../../components/breadcrumb";
+import { APPLY_QUOTE_BREADCRUMBS } from "../../constants/AppConst";
 
 const ApplyRfp = () => {
   const params = useParams();
@@ -28,7 +30,7 @@ const ApplyRfp = () => {
       const formData = new FormData();
       formData.append("item_price", values.itemPrice);
       formData.append("total_cost", values.totalCost);
-      formData.append("_method","put")
+      formData.append("_method", "put");
       const res = await applyForRfp(params?.id, formData);
       if (res?.data?.response === "success") {
         toast.success("Quote Submitted successfully");
@@ -45,18 +47,7 @@ const ApplyRfp = () => {
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">Apply RFP</h5>
-
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.VENDOR_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.RFP_FOR_QUOTES}>RFP</Link>
-            </li>
-            <li className="breadcrumb-item active">Apply Quote</li>
-          </ol>
-        </div>
+        <Breadcrumb items={APPLY_QUOTE_BREADCRUMBS} />
       </div>
 
       <div className="row">

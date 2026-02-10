@@ -7,6 +7,8 @@ import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
 import { getRfpQuotes } from "../../service/Rfp.js";
 import { useLocation } from "react-router-dom";
+import Breadcrumb from "../../components/breadcrumb/index.jsx";
+import { RFP_QUOTES_BREADCRUMBS } from "../../constants/AppConst.js";
 
 const RpfQutes = () => {
   const [rfpQuotesList, setRfpQuotesList] = useState(null);
@@ -87,18 +89,7 @@ const RpfQutes = () => {
     <div className="d-flex flex-column pt-1 px-3">
       <div className="page-title-box d-flex align-items-center justify-content-between">
         <h5 className="mb-0">RFP Quotes</h5>
-
-        <div className="page-title-right">
-          <ol className="breadcrumb m-0">
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.ADMIN_DASHBOARD}>Home</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to={ROUTES.RFP_LIST}>RFP</Link>
-            </li>
-            <li className="breadcrumb-item active">RFP Quotes</li>
-          </ol>
-        </div>
+        <Breadcrumb items={RFP_QUOTES_BREADCRUMBS} />
       </div>
       <Table title={"RFP Quotes"} data={currentPageData} columns={columns} />
       <ReactPaginate

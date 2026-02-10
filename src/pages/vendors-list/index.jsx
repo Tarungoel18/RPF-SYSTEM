@@ -5,7 +5,6 @@ import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
 import { getVendors, approveVendor } from "../../service/Vendors.js";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import "./vendor.css";
 
@@ -14,13 +13,12 @@ const VendorsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
-  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchVendors = async () => {
       setIsLoading(true);
       try {
-        const res = await getVendors(token);
+        const res = await getVendors();
         const vends = Object.values(res?.data?.vendors || {});
         setVendors(vends);
         console.log(res?.data?.vends);
@@ -47,7 +45,7 @@ const VendorsList = () => {
       const formData = new FormData();
       formData.append("user_id", row?.user_id);
       formData.append("status", "approved");
-      const res = await approveVendor(formData, token);
+      const res = await approveVendor(formData);
       if (res?.data?.response === "success") {
         toast.success("Vendor Approved");
         setVendors((prev) =>

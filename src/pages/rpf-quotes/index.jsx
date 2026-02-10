@@ -5,7 +5,6 @@ import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
-import { useSelector } from "react-redux";
 import { getRfpQuotes } from "../../service/Rfp.js";
 import { useLocation } from "react-router-dom";
 
@@ -14,7 +13,6 @@ const RpfQutes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
-  const { token } = useSelector((state) => state.auth);
   const { id } = useParams();
   const location = useLocation();
   const { rfpId, quantity } = location.state || {};
@@ -24,7 +22,7 @@ const RpfQutes = () => {
       setIsLoading(true);
       try {
         if (!id) return;
-        const res = await getRfpQuotes(id, token);
+        const res = await getRfpQuotes(id);
         const rfpQuotes = Object.values(res?.data?.quotes || {});
         setRfpQuotesList(rfpQuotes);
         console.log(res?.data?.quotes);

@@ -3,11 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { addCategory } from "../../service/Category.js";
-import { useSelector } from "react-redux";
 import { ROUTES } from "../../constants/RoutesConst.js";
 
 const AddCategory = () => {
-  const { token } = useSelector((state) => state.auth);
   const validationSchema = Yup.object({
     category: Yup.string().required("Category is required"),
   });
@@ -20,7 +18,7 @@ const AddCategory = () => {
     try {
       const formData = new FormData();
       formData.append("name", values.category);
-      const res = await addCategory(formData, token);
+      const res = await addCategory(formData);
       if (res?.data?.response === "success") {
         toast.success("Category added successfully");
       } else {

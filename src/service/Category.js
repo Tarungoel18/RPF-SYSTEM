@@ -5,9 +5,7 @@ export const getCategories = async () => {
   return axiosInstance.get(API.CATEGORIES);
 };
 
-export const addCategory = (payload, token) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return axiosInstance.post(API.CATEGORIES, payload, config);
+export const addCategory = (payload) => {
+
+  return axiosInstance.post(API.CATEGORIES, payload);
 };

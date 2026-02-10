@@ -1,30 +1,18 @@
 import axiosInstance from "../utils/axiosInstance.js";
 import API from "../constants/ApiConst";
 
-export const getRfps = (token) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return axiosInstance.get(API.RFP_LIST, config);
+export const getRfps = () => {
+  return axiosInstance.get(API.RFP_LIST);
 };
 
-export const closeRfp = (id, token) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return axiosInstance.get(`${API.CLOSE_RFP}/${id}`, config);
+export const closeRfp = (id) => {
+  return axiosInstance.get(`${API.CLOSE_RFP}/${id}`);
 };
 
-export const getRfpQuotes = (id, token) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return axiosInstance.get(`${API.RFP_QUOTES}/${id}`, config);
+export const getRfpQuotes = (id) => {
+  return axiosInstance.get(`${API.RFP_QUOTES}/${id}`);
 };
 
-export const addRpf = (payload, token) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return axiosInstance.post(API.CREATE_RPF, payload, config);
+export const addRpf = (payload) => {
+  return axiosInstance.post(API.CREATE_RPF, payload);
 };

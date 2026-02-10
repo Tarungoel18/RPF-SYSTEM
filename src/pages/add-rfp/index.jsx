@@ -10,11 +10,10 @@ import { getVendorsByCategory } from "../../service/Vendors.js";
 import { addRpf } from "../../service/Rfp.js";
 
 const AddRfp = () => {
-  const { token } = useSelector((state) => state.auth);
   const [allCategories, setAllCategories] = useState(null);
   const [allVendors, setAllVendors] = useState(null);
 
-  const { user_id } = useSelector((state) => state.auth.user);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -70,7 +69,7 @@ const AddRfp = () => {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       const formData = new FormData();
-      formData.append("user_id", user_id);
+      formData.append("user_id", user?.id);
       formData.append("item_name", values.itemName);
       formData.append("rfp_no", values.rfpNo);
       formData.append("quantity", values.quantity);
@@ -81,7 +80,7 @@ const AddRfp = () => {
       formData.append("categories", values.category);
       formData.append("item_description", values.itemDescription);
       console.log("Form Values:", values);
-      const res = await addRpf(formData, token);
+      const res = await addRpf(formData);
       if (res?.data?.response === "success") {
         toast.success("RPF Added Successfully");
       } else {
@@ -139,10 +138,8 @@ const AddRfp = () => {
 
                           if (categoryId) {
                             try {
-                              const res = await getVendorsByCategory(
-                                categoryId,
-                                token,
-                              );
+                              const res =
+                                await getVendorsByCategory(categoryId);
                               const vendorsArray = Object.values(
                                 res?.data?.vendors || {},
                               );

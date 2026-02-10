@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ROUTES } from "../../constants/RoutesConst.js";
 import { closeRfp, getRfps } from "../../service/Rfp.js";
-import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 const RfpList = () => {
@@ -13,13 +12,12 @@ const RfpList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
-  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchRfps = async () => {
       setIsLoading(true);
       try {
-        const res = await getRfps(token);
+        const res = await getRfps();
         const rfps = Object.values(res?.data?.rfps || {});
         setRfpList(rfps);
         console.log(res?.data?.rfps);
@@ -45,7 +43,7 @@ const RfpList = () => {
     console.log(row);
 
     try {
-      const res = await closeRfp(row?.rfp_id, token);
+      const res = await closeRfp(row?.rfp_id);
       if (res?.data?.response === "success") {
         toast.success(res?.data?.quotes);
         setRfpList((prev) =>

@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { register } from "../../service/Auth.js";
-import { getCategory } from "../../service/Category.js";
+import { getCategories } from "../../service/Category.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ const VendorSignUp = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await getCategory();
+        const res = await getCategories();
         if (res?.data?.response === "success") {
           const categoriesArray = Object.values(res.data.categories);
           setCategories(categoriesArray);

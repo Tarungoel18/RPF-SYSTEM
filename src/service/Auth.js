@@ -1,4 +1,4 @@
-import axiosInstance from "./axiosInstance.js";
+import axiosInstance from "../utils/axiosInstance.js";
 import API from "../constants/ApiConst.js";
 
 export const login = async (payload) => {

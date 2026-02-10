@@ -1,4 +1,4 @@
-import axiosInstance from "./axiosInstance";
+import axiosInstance from "../utils/axiosInstance.js";
 import API from "../constants/ApiConst";
 
 export const getRfps = (token) => {

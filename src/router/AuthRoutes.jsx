@@ -10,6 +10,7 @@ const AuthRoutes = () => {
   return (
     <Suspense fallback={<BeatLoader />}>
       <Routes>
+        <Route path="/" element={<Navigate to={ROUTES.LOGIN} replace />} />
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.SIGNUP} element={<VendorSignUp />} />
         <Route

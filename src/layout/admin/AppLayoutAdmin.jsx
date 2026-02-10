@@ -28,7 +28,7 @@ const AppLayoutAdmin = () => {
 
           <div className="d-flex pr-2">
             <div className="dropdown d-inline-block">
-              <span className="d-none d-xl-inline-block ml-1" key="t-henry">
+              <span className=" d-xl-inline-block ml-1" key="t-henry">
                 {user?.name}
               </span>
               &nbsp;&nbsp;

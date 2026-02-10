@@ -11,5 +11,6 @@ export const ROUTES = {
   ADD_RFP:"/add-rfp",
   RFP_FOR_QUOTES:"/rfp-for-quotes",
   APPLY_RFP:"/apply-rfp",
+  REGISTER_ADMIN:"/register-admin",
   NOT_FOUND: "*",
 };

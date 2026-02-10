@@ -4,15 +4,16 @@ import { BeatLoader } from "react-spinners";
 import { ROUTES } from "../constants/RoutesConst.js";
 const Login = lazy(() => import("../pages/login"));
 const VendorSignUp = lazy(() => import("../pages/vendor-signup"));
+const AdminSignUp = lazy(() => import("../pages/admin-signup"));
 
 const AuthRoutes = () => {
-  // TODO -> Move endpoints to constant file
   return (
     <Suspense fallback={<BeatLoader />}>
       <Routes>
         <Route path="/" element={<Navigate to={ROUTES.LOGIN} replace />} />
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.SIGNUP} element={<VendorSignUp />} />
+        <Route path={ROUTES.REGISTER_ADMIN} element={<AdminSignUp />} />
         <Route
           path={ROUTES.NOT_FOUND}
           element={<Navigate to={ROUTES.LOGIN} replace />}

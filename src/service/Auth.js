@@ -9,4 +9,8 @@ export const register = async (payload) => {
   return axiosInstance.post(API.REGISTER_VENDOR, payload);
 };
 
+export const registerAdmin = async (payload) => {
+  return axiosInstance.post(API.REGISTER_ADMIN, payload);
+}; 
+
 

@@ -10,6 +10,7 @@ const API = {
   CREATE_RPF: "/createrfp",
   RFP_BY_USER_ID: "/rfp/getrfp",
   RFP_APPLY: "/rfp/apply",
+  REGISTER_ADMIN: "/registeradmin",
 };
 
 export default API;

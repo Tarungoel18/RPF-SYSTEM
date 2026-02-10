@@ -23,15 +23,19 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    return response;
-  },
-  (error) => {
-    if (error.response && error.response.status === 401) {
+    if (
+      response?.data?.response === "error" &&
+      response?.data?.errors === "Authorization failled"
+    ) {
       localStorage.removeItem(TOKEN);
       localStorage.removeItem(USER);
       localStorage.removeItem(ROLE);
       window.location.href = ROUTES.LOGIN;
+      return;
     }
+    return response;
+  },
+  (error) => {
     return Promise.reject(error);
   },
 );

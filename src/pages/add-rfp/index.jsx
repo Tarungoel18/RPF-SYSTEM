@@ -66,6 +66,27 @@ const AddRfp = () => {
     vendors: [],
   };
 
+  const handleCategoryChange = async (e, setFieldValue) => {
+    const categoryId = e.target.value;
+
+    setFieldValue("category", categoryId);
+    setFieldValue("vendors", []);
+
+    if (!categoryId) {
+      setAllVendors([]);
+      return;
+    }
+
+    try {
+      const res = await getVendorsByCategory(categoryId);
+      const vendorsArray = Object.values(res?.data?.vendors || {});
+      setAllVendors(vendorsArray);
+    } catch (error) {
+      console.error(error);
+      setAllVendors([]);
+    }
+  };
+
   const handleSubmit = async (values, { resetForm }) => {
     try {
       const formData = new FormData();
@@ -131,26 +152,7 @@ const AddRfp = () => {
                         as="select"
                         name="category"
                         className="form-control"
-                        onChange={async (e) => {
-                          const categoryId = e.target.value;
-                          setFieldValue("category", categoryId);
-                          setFieldValue("vendors", []);
-                          if (categoryId) {
-                            try {
-                              const res =
-                                await getVendorsByCategory(categoryId);
-                              const vendorsArray = Object.values(
-                                res?.data?.vendors || {},
-                              );
-                              setAllVendors(vendorsArray);
-                            } catch (error) {
-                              console.error(error);
-                              setAllVendors([]);
-                            }
-                          } else {
-                            setAllVendors([]);
-                          }
-                        }}
+                        onChange={(e) => handleCategoryChange(e, setFieldValue)}
                       >
                         {allCategories?.map((cat) => (
                           <option key={cat.id} value={cat.id}>

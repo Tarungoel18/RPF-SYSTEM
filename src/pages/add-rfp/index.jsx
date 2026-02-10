@@ -17,18 +17,19 @@ const AddRfp = () => {
 
   const { user } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await getCategories();
-        if (res?.data?.response === "success") {
-          const categoriesArray = Object.values(res?.data?.categories);
-          setAllCategories(categoriesArray);
-        }
-      } catch (error) {
-        console.error(error);
+  const fetchCategories = async () => {
+    try {
+      const res = await getCategories();
+      if (res?.data?.response === "success") {
+        const categoriesArray = Object.values(res?.data?.categories);
+        setAllCategories(categoriesArray);
       }
-    };
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  useEffect(() => {
     fetchCategories();
   }, []);
 

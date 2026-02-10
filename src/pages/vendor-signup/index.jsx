@@ -9,18 +9,19 @@ import { ROUTES } from "../../constants/RoutesConst";
 
 const VendorSignUp = () => {
   const [categories, setCategories] = useState(null);
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await getCategories();
-        if (res?.data?.response === "success") {
-          const categoriesArray = Object.values(res.data.categories);
-          setCategories(categoriesArray);
-        }
-      } catch (error) {
-        console.error(error);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await getCategories();
+      if (res?.data?.response === "success") {
+        const categoriesArray = Object.values(res.data.categories);
+        setCategories(categoriesArray);
       }
-    };
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
     fetchCategories();
   }, []);
 

@@ -21,20 +21,21 @@ const RfpForQuotes = () => {
 
   const { user } = useSelector((state) => state.auth);
 
+  const fetchRfps = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getRfpsByUserId(user?.id);
+      const rfps = Object.values(res?.data?.rfps || {});
+      setRfpList(rfps);
+      console.log(res?.data?.rfps);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchRfps = async () => {
-      setIsLoading(true);
-      try {
-        const res = await getRfpsByUserId(user?.id);
-        const rfps = Object.values(res?.data?.rfps || {});
-        setRfpList(rfps);
-        console.log(res?.data?.rfps);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchRfps();
   }, []);
 

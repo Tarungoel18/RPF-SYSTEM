@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { getRfpQuotes } from "../../../../service/Rfp.js";
-import "./index.css"
+import "./index.css";
 const QuoteModal = ({ show, onHide, rfpId }) => {
   const [quote, setQuote] = useState(null);
   const [loading, setLoading] = useState(false);
   console.log(quote);
 
+  const fetchQuote = async () => {
+    setLoading(true);
+    try {
+      const res = await getRfpQuotes(rfpId);
+      setQuote(res?.data?.quote);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     if (rfpId && show) {
-      const fetchQuote = async () => {
-        setLoading(true);
-        try {
-          const res = await getRfpQuotes(rfpId);
-          setQuote(res?.data?.quote);
-        } catch (err) {
-          console.error(err);
-        } finally {
-          setLoading(false);
-        }
-      };
       fetchQuote();
     }
   }, [rfpId, show]);
@@ -26,10 +26,7 @@ const QuoteModal = ({ show, onHide, rfpId }) => {
   if (!show) return null;
 
   return (
-    <div
-      className="modal show d-block bg-modal"
-      tabIndex="-1"
-    >
+    <div className="modal show d-block bg-modal" tabIndex="-1">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">

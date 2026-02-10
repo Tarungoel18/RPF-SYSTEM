@@ -14,20 +14,20 @@ const RfpList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
 
+  const fetchRfps = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getRfps();
+      const rfps = Object.values(res?.data?.rfps || {});
+      setRfpList(rfps);
+      console.log(res?.data?.rfps);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchRfps = async () => {
-      setIsLoading(true);
-      try {
-        const res = await getRfps();
-        const rfps = Object.values(res?.data?.rfps || {});
-        setRfpList(rfps);
-        console.log(res?.data?.rfps);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchRfps();
   }, []);
 

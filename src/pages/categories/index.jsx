@@ -15,22 +15,23 @@ const Categories = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
 
+  const fetchCategories = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getCategories();
+      const cats = Object.values(res?.data?.categories || {})
+        .slice()
+        .reverse();
+      setCategories(cats);
+      console.log(res?.data?.categories);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchCategories = async () => {
-      setIsLoading(true);
-      try {
-        const res = await getCategories();
-        const cats = Object.values(res?.data?.categories || {})
-          .slice()
-          .reverse();
-        setCategories(cats);
-        console.log(res?.data?.categories);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchCategories();
   }, []);
 

@@ -16,20 +16,20 @@ const VendorsList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
 
+  const fetchVendors = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getVendors();
+      const vends = Object.values(res?.data?.vendors || {});
+      setVendors(vends);
+      console.log(res?.data?.vends);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchVendors = async () => {
-      setIsLoading(true);
-      try {
-        const res = await getVendors();
-        const vends = Object.values(res?.data?.vendors || {});
-        setVendors(vends);
-        console.log(res?.data?.vends);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchVendors();
   }, []);
 

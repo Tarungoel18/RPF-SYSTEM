@@ -19,21 +19,22 @@ const RpfQutes = () => {
   const location = useLocation();
   const { rfpId, quantity } = location.state || {};
 
+  const fetchRfpQuotes = async () => {
+    setIsLoading(true);
+    try {
+      if (!id) return;
+      const res = await getRfpQuotes(id);
+      const rfpQuotes = Object.values(res?.data?.quotes || {});
+      setRfpQuotesList(rfpQuotes);
+      console.log(res?.data?.quotes);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchRfpQuotes = async () => {
-      setIsLoading(true);
-      try {
-        if (!id) return;
-        const res = await getRfpQuotes(id);
-        const rfpQuotes = Object.values(res?.data?.quotes || {});
-        setRfpQuotesList(rfpQuotes);
-        console.log(res?.data?.quotes);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchRfpQuotes();
   }, [id]);
 

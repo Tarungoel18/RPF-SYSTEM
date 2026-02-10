@@ -80,7 +80,7 @@ const VendorSignUp = () => {
       .matches(/^\d{10}$/, "Phone Number must be exactly 10 digits"),
   });
 
-  const handleSubmit = async (values, { setSubmitting,resetForm }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     console.log(values);
     //TODO-> Handle Category Payload
     try {
@@ -107,7 +107,7 @@ const VendorSignUp = () => {
       toast.error("Something went wrong");
     } finally {
       setSubmitting(false);
-      resetForm()
+      resetForm();
     }
   };
   return (
@@ -361,7 +361,6 @@ const VendorSignUp = () => {
                                 className="form-control"
                                 id="categories"
                               >
-                                <option value="">All Category</option>
                                 {categories?.map((cat) => (
                                   <option key={cat.id} value={cat.id}>
                                     {cat.name}
@@ -386,12 +385,11 @@ const VendorSignUp = () => {
                               {isSubmitting ? "Registerring " : "Register"}
                             </button>
                           </div>
-                             <div className="mt-4 text-center">
-                          <Link to={ROUTES.LOGIN} className="text-muted">
-                            <i className="mdi mdi-lock mr-1"></i> Login
-                            
-                          </Link>
-                        </div>
+                          <div className="mt-4 text-center">
+                            <Link to={ROUTES.LOGIN} className="text-muted">
+                              <i className="mdi mdi-lock mr-1"></i> Login
+                            </Link>
+                          </div>
                         </div>
                       </Form>
                     )}

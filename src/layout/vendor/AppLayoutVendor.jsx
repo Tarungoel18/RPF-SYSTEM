@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import "./vendor.css";
 import { ROUTES } from "../../constants/RoutesConst.js";
+import Footer from "../../components/footer/index.jsx";
+import Header from "../../components/header/index.jsx";
 //TODO-> Remove inline css and handle left navbar
 const AppLayoutVendor = () => {
   const dispatch = useDispatch();
@@ -15,35 +17,7 @@ const AppLayoutVendor = () => {
 
   return (
     <div id="layout-wrapper">
-      <header id="page-topbar">
-        <div className="navbar-header">
-          <div className="d-flex bg-navy">
-            <div className="navbar-brand-box">
-              <span className="logo-lg">
-                <img src={velocityLogo} alt="Velocity Logo" height="75" />
-              </span>
-            </div>
-          </div>
-
-          <div className="d-flex pr-2">
-            <div className="dropdown d-inline-block">
-              <span className="d-none d-xl-inline-block ml-1" key="t-henry">
-                {user?.name}
-              </span>
-              &nbsp;&nbsp;
-              {/* //TODO-> change logout button style */}
-              <button
-                className="button-unset text-danger"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-      {/* //TODO->Remove inline css */}
-
+     <Header/>
       <div className="vertical-menu bg-navy">
         <div data-simplebar className="h-100">
           <div id="sidebar-menu">
@@ -59,7 +33,10 @@ const AppLayoutVendor = () => {
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.RFP_FOR_QUOTES} className="waves-effect hoverWhite">
+                <Link
+                  to={ROUTES.RFP_FOR_QUOTES}
+                  className="waves-effect hoverWhite"
+                >
                   <i className="mdi mdi-receipt"></i>
                   <span>RFP For Quotes</span>
                 </Link>
@@ -68,27 +45,11 @@ const AppLayoutVendor = () => {
           </div>
         </div>
       </div>
-      {/* //TODO-> Make a seprate component for this */}
       <div className="main-content">
         <div className="page-content">
           <Outlet />
         </div>
-
-        <footer className="footer">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-sm-6">2022 &copy; Copyright.</div>
-              <div className="col-sm-6">
-                <div className="text-sm-right d-none d-sm-block">
-                  Support Email:{" "}
-                  <a href="#" target="_blank" className="text-muted">
-                    support@velsof.com
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

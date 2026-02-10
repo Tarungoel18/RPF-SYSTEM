@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import "./admin.css";
 import { ROUTES } from "../../constants/RoutesConst.js";
+import Footer from "../../components/footer/index.jsx";
+import Header from "../../components/header/index.jsx";
 //TODO-> Remove inline css and handle left navbar and handle Breadcrumbs
 
 const AppLayoutAdmin = () => {
@@ -16,41 +18,13 @@ const AppLayoutAdmin = () => {
 
   return (
     <div id="layout-wrapper">
-      <header id="page-topbar">
-        <div className="navbar-header">
-          <div className="d-flex bg-navy">
-            <div className="navbar-brand-box">
-              <span className="logo-lg">
-                <img src={velocityLogo} alt="Velocity Logo" height="75" />
-              </span>
-            </div>
-          </div>
-
-          <div className="d-flex pr-2">
-            <div className="dropdown d-inline-block">
-              <span className=" d-xl-inline-block ml-1" key="t-henry">
-                {user?.name}
-              </span>
-              &nbsp;&nbsp;
-              {/* //TODO-> change logout button style */}
-              <button
-                className="button-unset text-danger"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-      {/* //TODO->Remove inline css */}
+      <Header />
 
       <div className="vertical-menu bg-navy">
         <div data-simplebar className="h-100">
           <div id="sidebar-menu">
             <ul className="metismenu list-unstyled" id="side-menu">
               <li>
-                {/* //TODO-> Use variable instead of hardcoding them in all the file */}
                 <Link
                   to={ROUTES.ADMIN_DASHBOARD}
                   className="waves-effect hoverWhite"
@@ -93,21 +67,7 @@ const AppLayoutAdmin = () => {
           <Outlet />
         </div>
 
-        <footer className="footer">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-sm-6">2022 &copy; Copyright.</div>
-              <div className="col-sm-6">
-                <div className="text-sm-right d-none d-sm-block">
-                  Support Email:{" "}
-                  <a href="#" target="_blank" className="text-muted">
-                    support@velsof.com
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import "./index.css";
 const QuoteModal = ({ show, onHide, rfpId }) => {
   const [quote, setQuote] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(quote);
 
   const fetchQuote = async () => {
     setLoading(true);

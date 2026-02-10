@@ -27,7 +27,6 @@ const RfpForQuotes = () => {
       const res = await getRfpsByUserId(user?.id);
       const rfps = Object.values(res?.data?.rfps || {});
       setRfpList(rfps);
-      console.log(res?.data?.rfps);
     } catch (error) {
       console.error(error);
     } finally {

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/slices/authslice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ROLE } from "../../constants/AppConst";
+import { ROLES } from "../../constants/AppConst";
 import { ROUTES } from "../../constants/RoutesConst";
 
 const Login = () => {
@@ -27,11 +27,7 @@ const Login = () => {
       const formData = new FormData();
       formData.append("email", values.email);
       formData.append("password", values.password);
-      //TODO-> Remove console.log
-
       const res = await login(formData);
-      console.log(res);
-
       if (res?.data?.response === "success") {
         dispatch(
           loginSuccess({
@@ -44,8 +40,7 @@ const Login = () => {
         );
         toast.success("User logged in successfully");
 
-        if (res?.data?.type === ROLE.ADMIN) {
-          //TODO-> move route to constant
+        if (res?.data?.type === ROLES.ADMIN) {
           navigate(ROUTES.ADMIN_DASHBOARD);
         } else {
           navigate(ROUTES.VENDOR_DASHBOARD);

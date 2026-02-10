@@ -9,7 +9,6 @@ import { APPLY_QUOTE_BREADCRUMBS } from "../../constants/AppConst";
 
 const ApplyRfp = () => {
   const params = useParams();
-  console.log(params);
   const validationSchema = Yup.object({
     itemPrice: Yup.number()
       .required("Item Price is required")
@@ -25,7 +24,6 @@ const ApplyRfp = () => {
   };
 
   const handleSubmit = async (values, { resetForm }) => {
-    console.log("Form values:", values);
     try {
       const formData = new FormData();
       formData.append("item_price", values.itemPrice);

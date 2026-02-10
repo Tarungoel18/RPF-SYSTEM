@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ROLE, TOKEN, USER } from "../../constants/AppConst";
 
-//TODO-> Move constants in common file
 const initialState = {
-  token: localStorage.getItem("token") || null,
-  role: localStorage.getItem("role") || null,
-  user: JSON.parse(localStorage.getItem("user") || null),
-  isAuthenticated: !!localStorage.getItem("token"),
+  token: localStorage.getItem(TOKEN) || null,
+  role: localStorage.getItem(ROLE) || null,
+  user: JSON.parse(localStorage.getItem(USER) || null),
+  isAuthenticated: !!localStorage.getItem(TOKEN),
 };
 
 const authSlice = createSlice({
@@ -19,10 +19,10 @@ const authSlice = createSlice({
       state.user = { id: user_id, name, email };
       state.isAuthenticated = true;
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", type);
+      localStorage.setItem(TOKEN, token);
+      localStorage.setItem(ROLE, type);
       localStorage.setItem(
-        "user",
+        USER,
         JSON.stringify({ id: user_id, name, email }),
       );
     },
@@ -32,9 +32,9 @@ const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
 
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-      localStorage.removeItem("user");
+      localStorage.removeItem(TOKEN);
+      localStorage.removeItem(ROLE);
+      localStorage.removeItem(USER);
     },
   },
 });

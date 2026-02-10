@@ -1,6 +1,6 @@
 import { ROUTES } from "./RoutesConst.js";
 
-export const ROLE = {
+export const ROLES = {
   ADMIN: "admin",
   VENDOR: "vendor",
 };
@@ -87,4 +87,6 @@ export const VENDORS_BREADCRUMBS = [
   { label: "Vendors", active: true },
 ];
 
-
+export const TOKEN = "token";
+export const ROLE = "role";
+export const USER = "user";

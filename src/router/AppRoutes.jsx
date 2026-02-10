@@ -4,7 +4,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import AppLayoutAdmin from "../layout/admin/AppLayoutAdmin";
 import AppLayoutVendor from "../layout/vendor/AppLayoutVendor";
 import { BeatLoader } from "react-spinners";
-import { ROLE } from "../constants/AppConst";
+import { ROLES } from "../constants/AppConst";
 import { ROUTES } from "../constants/RoutesConst.js";
 
 const AdminDashboard = lazy(() => import("../pages/admin-dashboard"));
@@ -21,7 +21,7 @@ const ApplyRfp = lazy(() => import("../pages/apply-rfp"));
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route element={<ProtectedRoute allowedRoles={[ROLE.ADMIN]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[ROLES.ADMIN]} />}>
         <Route element={<AppLayoutAdmin />}>
           <Route
             path={ROUTES.ADMIN_DASHBOARD}
@@ -82,7 +82,7 @@ const AppRoutes = () => {
         </Route>
       </Route>
 
-      <Route element={<ProtectedRoute allowedRoles={[ROLE.VENDOR]} />}>
+      <Route element={<ProtectedRoute allowedRoles={[ROLES.VENDOR]} />}>
         <Route element={<AppLayoutVendor />}>
           <Route
             path={ROUTES.VENDOR_DASHBOARD}

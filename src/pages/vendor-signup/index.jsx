@@ -56,7 +56,6 @@ const VendorSignUp = () => {
           const parts = value.split(",");
           if (parts.length !== 3) return false;
           return parts.every((p) => /^(0|[1-9]\d*)(\.\d+)?$/.test(p));
-          //TODO -> Regex in common file
         },
       ),
     noOfEmployees: Yup.number()
@@ -82,8 +81,6 @@ const VendorSignUp = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values);
-    //TODO-> Handle Category Payload
     try {
       const formData = new FormData();
       formData.append("firstname", values.firstName);
@@ -382,7 +379,6 @@ const VendorSignUp = () => {
                               type="submit"
                               disabled={isSubmitting}
                             >
-                              {/* //TODO -> Change Button Text */}
                               {isSubmitting ? "Registering " : "Register"}
                             </button>
                           </div>

@@ -22,7 +22,6 @@ const VendorsList = () => {
       const res = await getVendors();
       const vends = Object.values(res?.data?.vendors || {});
       setVendors(vends);
-      console.log(res?.data?.vends);
     } catch (error) {
       console.error(error);
     } finally {
@@ -42,7 +41,6 @@ const VendorsList = () => {
   };
 
   const handleStatus = async (row) => {
-    //TODO-> Add a Spinner
     try {
       const formData = new FormData();
       formData.append("user_id", row?.user_id);
@@ -60,7 +58,6 @@ const VendorsList = () => {
       } else {
         toast.error(res?.data?.message);
       }
-      console.log(row);
     } catch (error) {
       console.error(error);
     }

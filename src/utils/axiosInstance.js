@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ROUTES } from "../constants/RoutesConst";
+import { ROLE, TOKEN, USER } from "../constants/AppConst";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -9,7 +10,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(TOKEN);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,9 +27,9 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("role");
+      localStorage.removeItem(TOKEN);
+      localStorage.removeItem(USER);
+      localStorage.removeItem(ROLE);
       window.location.href = ROUTES.LOGIN;
     }
     return Promise.reject(error);

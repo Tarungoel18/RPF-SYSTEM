@@ -26,7 +26,6 @@ const RpfQutes = () => {
       const res = await getRfpQuotes(id);
       const rfpQuotes = Object.values(res?.data?.quotes || {});
       setRfpQuotesList(rfpQuotes);
-      console.log(res?.data?.quotes);
     } catch (error) {
       console.error(error);
     } finally {

@@ -20,7 +20,6 @@ const RfpList = () => {
       const res = await getRfps();
       const rfps = Object.values(res?.data?.rfps || {});
       setRfpList(rfps);
-      console.log(res?.data?.rfps);
     } catch (error) {
       console.error(error);
     } finally {
@@ -40,9 +39,6 @@ const RfpList = () => {
   };
 
   const handleStatus = async (row) => {
-    //TODO-> ADD Spinner
-    console.log(row);
-
     try {
       const res = await closeRfp(row?.rfp_id);
       if (res?.data?.response === "success") {

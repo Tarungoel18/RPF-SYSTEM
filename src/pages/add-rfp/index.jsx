@@ -103,7 +103,6 @@ const AddRfp = () => {
       formData.append("vendors", values.vendors.join(","));
       formData.append("categories", values.category);
       formData.append("item_description", values.itemDescription);
-      console.log("Form Values:", values);
       const res = await addRpf(formData);
       if (res?.data?.response === "success") {
         toast.success("RPF Added Successfully");

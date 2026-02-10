@@ -23,7 +23,6 @@ const Categories = () => {
         .slice()
         .reverse();
       setCategories(cats);
-      console.log(res?.data?.categories);
     } catch (error) {
       console.error(error);
     } finally {
@@ -46,7 +45,6 @@ const Categories = () => {
   };
 
   const handleStatus = (row) => {
-    console.log("Clickedd", row);
   };
 
   const columns = [

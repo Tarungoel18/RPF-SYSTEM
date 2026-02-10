@@ -20,35 +20,99 @@ const ApplyRfp = lazy(() => import("../pages/apply-rfp"));
 
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<BeatLoader />}>
-      <Routes>
-        <Route element={<ProtectedRoute allowedRoles={[ROLE.ADMIN]} />}>
-          <Route element={<AppLayoutAdmin />}>
-            <Route path={ROUTES.ADMIN_DASHBOARD} element={<AdminDashboard />} />
-            <Route path={ROUTES.CATEGORIES} element={<Categories />} />
-            <Route path={ROUTES.ADD_CATEGORY} element={<AddCategory />} />
-            <Route path={ROUTES.VENDORS_LIST} element={<VendorsList />} />
-            <Route path={ROUTES.RFP_LIST} element={<RfpList />} />
-            <Route path={`${ROUTES.QUOTES}/:id`} element={<RpfQuotes />} />
-            <Route path={ROUTES.ADD_RFP} element={<AddRfp />} />
-          </Route>
+    <Routes>
+      <Route element={<ProtectedRoute allowedRoles={[ROLE.ADMIN]} />}>
+        <Route element={<AppLayoutAdmin />}>
+          <Route
+            path={ROUTES.ADMIN_DASHBOARD}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <AdminDashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.CATEGORIES}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <Categories />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.ADD_CATEGORY}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <AddCategory />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.VENDORS_LIST}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <VendorsList />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.RFP_LIST}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <RfpList />
+              </Suspense>
+            }
+          />
+          <Route
+            path={`${ROUTES.QUOTES}/:id`}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <RpfQuotes />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.ADD_RFP}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <AddRfp />
+              </Suspense>
+            }
+          />
         </Route>
+      </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={[ROLE.VENDOR]} />}>
-          <Route element={<AppLayoutVendor />}>
-            <Route
-              path={ROUTES.VENDOR_DASHBOARD}
-              element={<VendorDashboard />}
-            />
-            <Route path={ROUTES.RFP_FOR_QUOTES} element={<RfpForQuotes />} />
-            <Route path={`${ROUTES.APPLY_RFP}/:id`} element={<ApplyRfp />} />
-          </Route>
+      <Route element={<ProtectedRoute allowedRoles={[ROLE.VENDOR]} />}>
+        <Route element={<AppLayoutVendor />}>
+          <Route
+            path={ROUTES.VENDOR_DASHBOARD}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <VendorDashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.RFP_FOR_QUOTES}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <RfpForQuotes />
+              </Suspense>
+            }
+          />
+          <Route
+            path={`${ROUTES.APPLY_RFP}/:id`}
+            element={
+              <Suspense fallback={<BeatLoader />}>
+                <ApplyRfp />
+              </Suspense>
+            }
+          />
         </Route>
+      </Route>
 
-        {/* TODO -> Create an Not Found page */}
-        <Route path={ROUTES.NOT_FOUND} element={<>Not Found</>} />
-      </Routes>
-    </Suspense>
+      <Route path={ROUTES.NOT_FOUND} element={<>Not Found</>} />
+    </Routes>
   );
 };
 

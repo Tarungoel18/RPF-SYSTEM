@@ -28,7 +28,7 @@ const AddRfp = () => {
       console.error(error);
     }
   };
-  
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -309,13 +309,21 @@ const AddRfp = () => {
                             className="form-control"
                             value={values.vendors}
                             onChange={(e) => {
-                              const selectedVendorIds = Array.from(
+                              const selectedOptions = Array.from(
                                 e.target.selectedOptions,
                                 (option) => option.value,
                               );
-                              setFieldValue("vendors", selectedVendorIds);
+                              if (selectedOptions.includes("all")) {
+                                const allVendorIds = allVendors.map(
+                                  (vendor) => vendor.user_id,
+                                );
+                                setFieldValue("vendors", allVendorIds);
+                              } else {
+                                setFieldValue("vendors", selectedOptions);
+                              }
                             }}
                           >
+                            <option value="all">All Vendors</option>
                             {allVendors?.map((vendor) => (
                               <option
                                 key={vendor?.user_id}

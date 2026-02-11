@@ -12,10 +12,13 @@ const Header = () => {
     <header id="page-topbar">
       <div className="navbar-header">
         <div className="d-flex bg-navy">
-          <div className="navbar-brand-box">
-            <span className="logo-lg">
-              <img src={velocityLogo} alt="Velocity Logo" height="75" />
-            </span>
+          <div className="d-none d-lg-block">
+            <img
+              src={velocityLogo}
+              alt="Velocity Logo"
+              width="250"
+              height="75"
+            />
           </div>
         </div>
 
